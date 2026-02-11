@@ -1,0 +1,39 @@
+﻿<Window x:Class="ControleMaterialIBAA.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ControleMaterialIBAA.View"
+        mc:Ignorable="d"
+        Title="Controle de Materiais IBAA" Height="230" Width="330"
+        Background="DarkSeaGreen">
+
+    <Window.Resources>
+        <Style x:Key="LabelPadrao" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style x:Key="BotaoPadrao" TargetType="Button">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="0,0,10,-6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Usuário:" Style="{StaticResource LabelPadrao}" HorizontalAlignment="Left" Margin="41,36,0,0" VerticalAlignment="Top" Height="26" Width="63"/>
+        <Label Content="Senha:" Style="{StaticResource LabelPadrao}" HorizontalAlignment="Left" Margin="39,95,0,0" VerticalAlignment="Top" Height="26" Width="51"/>
+        <Button Content="Login" Style="{StaticResource BotaoPadrao}" HorizontalAlignment="Left" Height="26" Margin="17,150,0,0" VerticalAlignment="Top" Width="111" Click="Button_Click"/>
+        <Button Content="Cadastrar" Style="{StaticResource BotaoPadrao}" HorizontalAlignment="Left" Height="26" Margin="179,150,0,0" VerticalAlignment="Top" Width="112"/>
+        <TextBox x:Name="TxtUsuario" HorizontalAlignment="Left" Height="30" Margin="123,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
+        <PasswordBox x:Name="TxtSenha" HorizontalAlignment="Left" Height="30" Margin="123,92,0,0" VerticalAlignment="Top" Width="153"/>
+
+    </Grid>
+</Window>

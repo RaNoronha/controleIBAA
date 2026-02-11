@@ -3,36 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\servicos\\servicodepartamentos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\servicos\\servicodepartamentos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DB7345EE-5E0E-44DE-B38E-94707A36D6DE}|Itens de Solu\u00E7\u00E3o{DB7345EE-5E0E-44DE-B38E-94707A36D6DE}|C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\.gitignore.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{DB7345EE-5E0E-44DE-B38E-94707A36D6DE}|Itens de Solu\u00E7\u00E3o{DB7345EE-5E0E-44DE-B38E-94707A36D6DE}|solutionrelative:.gitignore.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\servicos\\servicomateriais.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\servicos\\servicomateriais.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\view\\cadastrousuario.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\view\\cadastrousuario.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\servicos\\servicobase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\servicos\\servicobase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\view\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\view\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\servicos\\servicousuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\servicos\\servicousuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\modelos\\modelosmateriais.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\modelos\\modelosmateriais.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\helper\\senhahelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\helper\\senhahelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\config\\conexao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\config\\conexao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\view\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\view\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\controlematerialibaa.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\controlematerialibaa.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\viewmodels\\viewmodellogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\viewmodels\\viewmodellogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\infra\\sessao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\infra\\sessao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\viewmodels\\viewmodelusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\viewmodels\\viewmodelusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|c:\\users\\noronha\\source\\repos\\controlematerialibaa\\controlematerialibaa\\viewmodels\\viewmodelbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{165EEF16-E06B-698B-45FB-22C78AC8EB5B}|ControleMaterialIBAA\\ControleMaterialIBAA.csproj|solutionrelative:controlematerialibaa\\viewmodels\\viewmodelbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,66 +59,39 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ServicoDepartamentos.cs",
-              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\Servicos\\ServicoDepartamentos.cs",
-              "RelativeDocumentMoniker": "ControleMaterialIBAA\\Servicos\\ServicoDepartamentos.cs",
-              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\Servicos\\ServicoDepartamentos.cs",
-              "RelativeToolTip": "ControleMaterialIBAA\\Servicos\\ServicoDepartamentos.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAA1wA4AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T16:46:45.681Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ServicoBase.cs",
-              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\Servicos\\ServicoBase.cs",
-              "RelativeDocumentMoniker": "ControleMaterialIBAA\\Servicos\\ServicoBase.cs",
-              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\Servicos\\ServicoBase.cs",
-              "RelativeToolTip": "ControleMaterialIBAA\\Servicos\\ServicoBase.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T16:17:42.59Z",
+              "Title": ".gitignore.txt",
+              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\.gitignore.txt",
+              "RelativeDocumentMoniker": ".gitignore.txt",
+              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\.gitignore.txt",
+              "RelativeToolTip": ".gitignore.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-02-11T16:10:31.067Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ServicoMateriais.cs",
-              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\Servicos\\ServicoMateriais.cs",
-              "RelativeDocumentMoniker": "ControleMaterialIBAA\\Servicos\\ServicoMateriais.cs",
-              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\Servicos\\ServicoMateriais.cs",
-              "RelativeToolTip": "ControleMaterialIBAA\\Servicos\\ServicoMateriais.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAA1wCMAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T13:36:47.102Z",
+              "Title": "CadastroUsuario.xaml",
+              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\View\\CadastroUsuario.xaml",
+              "RelativeDocumentMoniker": "ControleMaterialIBAA\\View\\CadastroUsuario.xaml",
+              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\View\\CadastroUsuario.xaml",
+              "RelativeToolTip": "ControleMaterialIBAA\\View\\CadastroUsuario.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-02-11T15:59:07.851Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ModelosMateriais.cs",
-              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\Modelos\\ModelosMateriais.cs",
-              "RelativeDocumentMoniker": "ControleMaterialIBAA\\Modelos\\ModelosMateriais.cs",
-              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\Modelos\\ModelosMateriais.cs",
-              "RelativeToolTip": "ControleMaterialIBAA\\Modelos\\ModelosMateriais.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAmAAAAAAAAAA==",
+              "Title": "SenhaHelper.cs",
+              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\Helper\\SenhaHelper.cs",
+              "RelativeDocumentMoniker": "ControleMaterialIBAA\\Helper\\SenhaHelper.cs",
+              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\Helper\\SenhaHelper.cs",
+              "RelativeToolTip": "ControleMaterialIBAA\\Helper\\SenhaHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T13:33:50.439Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ControleMaterialIBAA",
-              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\ControleMaterialIBAA.csproj",
-              "RelativeDocumentMoniker": "ControleMaterialIBAA\\ControleMaterialIBAA.csproj",
-              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\ControleMaterialIBAA.csproj",
-              "RelativeToolTip": "ControleMaterialIBAA\\ControleMaterialIBAA.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-02-10T13:33:18.524Z",
+              "WhenOpened": "2026-02-11T14:15:28.622Z",
               "EditorCaption": ""
             },
             {
@@ -117,34 +102,99 @@
               "RelativeDocumentMoniker": "ControleMaterialIBAA\\Config\\Conexao.cs",
               "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\Config\\Conexao.cs",
               "RelativeToolTip": "ControleMaterialIBAA\\Config\\Conexao.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T12:40:33.521Z",
+              "WhenOpened": "2026-02-11T13:59:02.467Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ServicoUsuarios.cs",
+              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\Servicos\\ServicoUsuarios.cs",
+              "RelativeDocumentMoniker": "ControleMaterialIBAA\\Servicos\\ServicoUsuarios.cs",
+              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\Servicos\\ServicoUsuarios.cs",
+              "RelativeToolTip": "ControleMaterialIBAA\\Servicos\\ServicoUsuarios.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB0AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T13:35:05.511Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "ControleMaterialIBAA\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\MainWindow.xaml",
-              "RelativeToolTip": "ControleMaterialIBAA\\MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\View\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "ControleMaterialIBAA\\View\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\View\\MainWindow.xaml",
+              "RelativeToolTip": "ControleMaterialIBAA\\View\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-02-10T12:33:21.522Z",
+              "WhenOpened": "2026-02-11T13:04:20.434Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "ControleMaterialIBAA\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\MainWindow.xaml.cs",
-              "RelativeToolTip": "ControleMaterialIBAA\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABMAAAAFAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\View\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "ControleMaterialIBAA\\View\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\View\\MainWindow.xaml.cs",
+              "RelativeToolTip": "ControleMaterialIBAA\\View\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAEwDgAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T12:33:20.114Z",
+              "WhenOpened": "2026-02-11T12:21:57.518Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Sessao.cs",
+              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\Infra\\Sessao.cs",
+              "RelativeDocumentMoniker": "ControleMaterialIBAA\\Infra\\Sessao.cs",
+              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\Infra\\Sessao.cs",
+              "RelativeToolTip": "ControleMaterialIBAA\\Infra\\Sessao.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T11:50:52.154Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ViewModelUsuario.cs",
+              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\ViewModels\\ViewModelUsuario.cs",
+              "RelativeDocumentMoniker": "ControleMaterialIBAA\\ViewModels\\ViewModelUsuario.cs",
+              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\ViewModels\\ViewModelUsuario.cs",
+              "RelativeToolTip": "ControleMaterialIBAA\\ViewModels\\ViewModelUsuario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T11:45:28.273Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ViewModelLogin.cs",
+              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\ViewModels\\ViewModelLogin.cs",
+              "RelativeDocumentMoniker": "ControleMaterialIBAA\\ViewModels\\ViewModelLogin.cs",
+              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\ViewModels\\ViewModelLogin.cs",
+              "RelativeToolTip": "ControleMaterialIBAA\\ViewModels\\ViewModelLogin.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T11:39:06.448Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ViewModelBase.cs",
+              "DocumentMoniker": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\ViewModels\\ViewModelBase.cs",
+              "RelativeDocumentMoniker": "ControleMaterialIBAA\\ViewModels\\ViewModelBase.cs",
+              "ToolTip": "C:\\Users\\Noronha\\source\\repos\\ControleMaterialIBAA\\ControleMaterialIBAA\\ViewModels\\ViewModelBase.cs",
+              "RelativeToolTip": "ControleMaterialIBAA\\ViewModels\\ViewModelBase.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T11:37:01.522Z",
               "EditorCaption": ""
             }
           ]
