@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
 namespace ControleMaterialIBAA.Servicos
@@ -15,7 +16,8 @@ namespace ControleMaterialIBAA.Servicos
     {
         public async Task<ModelosUsuarios?> LoginAsync(string usuario, string senha)
         {
-            var usuarioEncoded = WebUtility.UrlEncode(usuario);
+            var login = usuario.Trim().ToLower();
+            var usuarioEncoded = WebUtility.UrlEncode(login);
 
             var url = $"{Conexao.BaseUrl}/usuarios" + $"?usuario=eq.{usuarioEncoded}" + $"&ativo=eq.true" + $"&limit=1"; 
 
@@ -27,16 +29,17 @@ namespace ControleMaterialIBAA.Servicos
 
             var usuarioDB = lista?.FirstOrDefault();
 
-            bool senhaOk = SenhaHelper.Verificar(senha, usuarioDB.hash);
-
             if (usuarioDB == null)
             {
                 return null;
             }
-            //if (!senhaOk)
-            //{
-            //    return null;
-            //}       
+
+            bool senhaOk = SenhaHelper.Verificar(senha, usuarioDB.hash);
+
+            if (!senhaOk)
+            {
+                return null;
+            }
 
             return usuarioDB;
         }
@@ -56,13 +59,21 @@ namespace ControleMaterialIBAA.Servicos
             return JsonConvert.DeserializeObject<List<ModelosUsuarios>>(json);
         }
 
-        public async Task CriarAsync(ModelosUsuarios material)
+        public async Task<bool> CriarAsync(string usuario, string hash)
         {
-            var json = JsonConvert.SerializeObject(material);
+            var dados = new ModelosUsuarios();
+            
+            dados.usuario = usuario.Trim().ToLower();
+            dados.hash = hash;
+            dados.ativo = true;
+
+            var json = JsonConvert.SerializeObject(dados);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await _http.PostAsync($"{Conexao.BaseUrl}/usuarios", content);
-            response.EnsureSuccessStatusCode();
+
+            return response.IsSuccessStatusCode;
+
         }
 
         public async Task AtualizarAsync(Guid id, ModelosUsuarios usuario)

@@ -5,14 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ControleMaterialIBAA.View"
         mc:Ignorable="d"
-        Title="CadastroUsuario" Height="319" Width="511">
-    <Grid Margin="28,0,0,29">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="426*"/>
-            <ColumnDefinition Width="130*"/>
-            <ColumnDefinition Width="109*"/>
-            <ColumnDefinition Width="135*"/>
-        </Grid.ColumnDefinitions>
+        Title="CadastroUsuario" Height="230" Width="334"
+        Background="DarkSeaGreen">
+
+    <Window.Resources>
+        <Style x:Key="LabelPadrao" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style x:Key="BotaoPadrao" TargetType="Button">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="0,0,0,-16">
+        <Label Content="Usuário:" Style="{StaticResource LabelPadrao}" HorizontalAlignment="Left" Height="30" Margin="10,17,0,0" VerticalAlignment="Top" Width="69"/>
+        <Label Content="Senha:" Style="{StaticResource LabelPadrao}" HorizontalAlignment="Left" Height="29" Margin="10,58,0,0" VerticalAlignment="Top" Width="59"/>
+        <TextBox x:Name="txtUsuario" HorizontalAlignment="Left" Height="26" Margin="153,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" Grid.ColumnSpan="3"/>
+        <PasswordBox x:Name="txtSenha" HorizontalAlignment="Left" Height="26" Margin="153,58,0,0" VerticalAlignment="Top" Width="157"/>
+        <Label Content="Repetir Senha:" Style="{StaticResource LabelPadrao}" HorizontalAlignment="Left" Height="29" Margin="10,104,0,0" VerticalAlignment="Top" Width="111"/>
+        <PasswordBox x:Name="txtRepetirSenha" HorizontalAlignment="Left" Height="26" Margin="153,104,0,0" VerticalAlignment="Top" Width="157"/>
+        <Button Content="Cadastrar" Style="{StaticResource BotaoPadrao}" HorizontalAlignment="Left" Height="34" Margin="96,148,0,0" VerticalAlignment="Top" Width="136" Click="BtnCadastrar_Click"/>
 
     </Grid>
 </Window>

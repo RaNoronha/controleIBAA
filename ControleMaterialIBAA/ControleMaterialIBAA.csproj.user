@@ -5,5 +5,11 @@
     <Compile Update="View\CadastroUsuario.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Paginas\CadastrarMaterial.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\TelaPrincipal.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

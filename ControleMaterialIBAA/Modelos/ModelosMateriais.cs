@@ -12,7 +12,8 @@ namespace ControleMaterialIBAA.Modelos
         public string marca { get; set; }
         public string numPat { get; set; }
         public decimal valor { get; set; }
-        public string aquisicao { get; set; }
+        public int qtd { get; set; }
+        public string aquisicao { get; set; }        
         public string responsavel { get; set; }
         public DateTime dtVerificacao { get; set; }
         public bool ativo { get; set; }

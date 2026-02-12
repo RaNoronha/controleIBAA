@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ControleMaterialIBAA.Helper;
+using ControleMaterialIBAA.Servicos;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -20,6 +22,40 @@ namespace ControleMaterialIBAA.View
         public CadastroUsuario()
         {
             InitializeComponent();
+        }        
+
+        private async void BtnCadastrar_Click(object sender, RoutedEventArgs e)
+        {
+            string usuario = txtUsuario.Text.Trim();
+            string senha = txtSenha.Password;
+            string repetirSenha = txtRepetirSenha.Password;
+
+            if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(senha))
+            {
+                MessageBox.Show("Usuário e senha são obrigatórios.");
+                return;
+            }
+
+            if (senha != repetirSenha)
+            {
+                MessageBox.Show("As senhas não conferem.");
+                return;
+            }
+
+            string hash = SenhaHelper.GerarHash(senha);
+
+            var servico = new ServicoUsuarios();
+            bool sucesso = await servico.CriarAsync(usuario, hash);
+
+            if (sucesso)
+            {
+                MessageBox.Show("Usuário cadastrado com sucesso!");
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Erro ao cadastrar usuário.");
+            }
         }
     }
 }

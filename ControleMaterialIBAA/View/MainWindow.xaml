@@ -31,7 +31,7 @@
         <Label Content="Usuário:" Style="{StaticResource LabelPadrao}" HorizontalAlignment="Left" Margin="41,36,0,0" VerticalAlignment="Top" Height="26" Width="63"/>
         <Label Content="Senha:" Style="{StaticResource LabelPadrao}" HorizontalAlignment="Left" Margin="39,95,0,0" VerticalAlignment="Top" Height="26" Width="51"/>
         <Button Content="Login" Style="{StaticResource BotaoPadrao}" HorizontalAlignment="Left" Height="26" Margin="17,150,0,0" VerticalAlignment="Top" Width="111" Click="Button_Click"/>
-        <Button Content="Cadastrar" Style="{StaticResource BotaoPadrao}" HorizontalAlignment="Left" Height="26" Margin="179,150,0,0" VerticalAlignment="Top" Width="112"/>
+        <Button Content="Cadastrar" Style="{StaticResource BotaoPadrao}" HorizontalAlignment="Left" Height="26" Margin="179,150,0,0" VerticalAlignment="Top" Width="112" Click="BtnCadastrar_Click"/>
         <TextBox x:Name="TxtUsuario" HorizontalAlignment="Left" Height="30" Margin="123,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
         <PasswordBox x:Name="TxtSenha" HorizontalAlignment="Left" Height="30" Margin="123,92,0,0" VerticalAlignment="Top" Width="153"/>
 
