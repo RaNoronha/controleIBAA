@@ -59,20 +59,21 @@ namespace ControleMaterialIBAA.Servicos
             return JsonConvert.DeserializeObject<List<ModelosUsuarios>>(json);
         }
 
-        public async Task<bool> CriarAsync(string usuario, string hash)
+        public async Task<bool> CriarAsync(ModelosUsuarios usuario)
         {
-            var dados = new ModelosUsuarios();
-            
-            dados.usuario = usuario.Trim().ToLower();
-            dados.hash = hash;
-            dados.ativo = true;
+            try
+            {
+                var json = JsonConvert.SerializeObject(usuario);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var json = JsonConvert.SerializeObject(dados);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await _http.PostAsync($"{Conexao.BaseUrl}/usuarios", content);
 
-            var response = await _http.PostAsync($"{Conexao.BaseUrl}/usuarios", content);
-
-            return response.IsSuccessStatusCode;
+                return response.IsSuccessStatusCode;
+            }
+            catch
+            {
+                return false;
+            }
 
         }
 

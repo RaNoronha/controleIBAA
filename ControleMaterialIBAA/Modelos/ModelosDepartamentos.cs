@@ -8,7 +8,8 @@ namespace ControleMaterialIBAA.Modelos
     {
         public Guid id { get; set; }
         public string nome { get; set; }
-        public string sub_departamento { get; set; }
-        public bool ativo { get; set; }
+        public bool ativo { get; set; } = true;        
+        public ICollection<ModelosSubDepartamentos> subDepartamentos { get; set; } = new List<ModelosSubDepartamentos>();       
+        public ICollection<ModelosMovimentacoes> movimentacoes { get; set; }
     }
 }

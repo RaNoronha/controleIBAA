@@ -5,15 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
-using static System.Net.WebRequestMethods;
 
 namespace ControleMaterialIBAA.Servicos
 {
-    public class ServicoDepartamentos : ServicoBase
+    public class ServicoSubDepartamentos :ServicoBase
     {
-        public async Task<List<ModelosDepartamentos>> ListarAsync(bool ativos = true)
+        public async Task<List<ModelosSubDepartamentos>> ListarAsync(bool ativos = true)
         {
-            var url = $"{Conexao.BaseUrl}/departamentos";
+            var url = $"{Conexao.BaseUrl}/sub_departamentos";
 
             if (ativos)
             {
@@ -23,34 +22,34 @@ namespace ControleMaterialIBAA.Servicos
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<List<ModelosDepartamentos>>(json);
+            return JsonConvert.DeserializeObject<List<ModelosSubDepartamentos>>(json);
         }
 
-        public async Task<ModelosDepartamentos?> ObterAsync(Guid id)
+        public async Task<ModelosSubDepartamentos?> ObterAsync(int id)
         {
-            var response = await _http.GetAsync($"{Conexao.BaseUrl}/departamentos?id=eq.{id}&limit=1");
+            var response = await _http.GetAsync($"{Conexao.BaseUrl}/sub_departamentos?id=eq.{id}&limit=1");
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStringAsync();
-            var lista = JsonConvert.DeserializeObject<List<ModelosDepartamentos>>(json);
+            var lista = JsonConvert.DeserializeObject<List<ModelosSubDepartamentos>>(json);
 
             return lista?.FirstOrDefault();
         }
 
-        public async Task AtualizarAsync(Guid id, ModelosDepartamentos departamento)
+        public async Task AtualizarAsync(Guid id, ModelosSubDepartamentos material)
         {
-            var json = JsonConvert.SerializeObject(departamento);
+            var json = JsonConvert.SerializeObject(material);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _http.PatchAsync($"{Conexao.BaseUrl}/departamentos?id=eq.{id}", content);
+            var response = await _http.PatchAsync($"{Conexao.BaseUrl}/sub_departamentos?id=eq.{id}", content);
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task<bool> CriarAsync(ModelosDepartamentos departamento)
+        public async Task<bool> CriarAsync(ModelosSubDepartamentos subdepartamento)
         {
             try
             {
-                var json = JsonConvert.SerializeObject(departamento);
+                var json = JsonConvert.SerializeObject(subdepartamento);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 var response = await _http.PostAsync($"{Conexao.BaseUrl}/departamentos", content);
@@ -62,19 +61,20 @@ namespace ControleMaterialIBAA.Servicos
                 return false;
             }
         }
+        
 
         public async Task InativarAsync(Guid id)
         {
             var json = JsonConvert.SerializeObject(new { ativo = false });
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _http.PatchAsync($"{Conexao.BaseUrl}/departamentos?id=eq.{id}", content);
+            var response = await _http.PatchAsync($"{Conexao.BaseUrl}/sub_departamentos?id=eq.{id}", content);
             response.EnsureSuccessStatusCode();
         }
 
         public async Task ExcluirAsync(Guid id)
         {
-            var response = await _http.DeleteAsync($"{Conexao.BaseUrl}/departamentos?id=eq.{id}");
+            var response = await _http.DeleteAsync($"{Conexao.BaseUrl}/sub_departamentos?id=eq.{id}");
             response.EnsureSuccessStatusCode();
         }
     }

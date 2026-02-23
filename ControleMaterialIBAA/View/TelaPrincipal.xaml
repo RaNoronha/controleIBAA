@@ -23,6 +23,7 @@
                        FontSize="18"
                        FontWeight="Bold"
                        Foreground="White"
+                       HorizontalAlignment="center"
                        Margin="15"
                        DockPanel.Dock="Top"/>
 
@@ -42,6 +43,19 @@
                                       FontSize="14"
                                       Selected="CadastrarMaterial"/>
                         
+                    </TreeViewItem>
+
+                    <!-- DEPARTAMENTOS -->
+                    <TreeViewItem Header="🏢 DEPARTAMENTOS"
+                                  FontSize="18"
+                                  FontFamily="Bahnschrift"                                         
+                                  FontWeight="Bold">
+                        <TreeViewItem Header="Cadastrar"
+                                      Margin="25,0,0,0"
+                                      FontFamily="Verdana"
+                                      FontSize="14"
+                                      Selected="CadastrarDepartamento"/>
+                       
                     </TreeViewItem>
 
 

@@ -1,4 +1,5 @@
 ﻿using ControleMaterialIBAA.Helper;
+using ControleMaterialIBAA.Modelos;
 using ControleMaterialIBAA.Servicos;
 using System;
 using System.Collections.Generic;
@@ -26,11 +27,11 @@ namespace ControleMaterialIBAA.View
 
         private async void BtnCadastrar_Click(object sender, RoutedEventArgs e)
         {
-            string usuario = txtUsuario.Text.Trim();
+            string nomeUsuario = txtUsuario.Text.Trim();
             string senha = txtSenha.Password;
             string repetirSenha = txtRepetirSenha.Password;
 
-            if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(senha))
+            if (string.IsNullOrEmpty(nomeUsuario) || string.IsNullOrEmpty(senha))
             {
                 MessageBox.Show("Usuário e senha são obrigatórios.");
                 return;
@@ -44,8 +45,16 @@ namespace ControleMaterialIBAA.View
 
             string hash = SenhaHelper.GerarHash(senha);
 
+            var usuario = new ModelosUsuarios
+            {
+                id = Guid.NewGuid(),
+                usuario = nomeUsuario,
+                hash = hash,
+                ativo = true
+            };
+
             var servico = new ServicoUsuarios();
-            bool sucesso = await servico.CriarAsync(usuario, hash);
+            bool sucesso = await servico.CriarAsync(usuario);
 
             if (sucesso)
             {

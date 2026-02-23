@@ -39,10 +39,10 @@ namespace ControleMaterialIBAA.View
         //    MainContent.Content = new ExcluirMaterial();
         //}
 
-        //private void CadastrarDepartamento(object sender, RoutedEventArgs e)
-        //{
-        //    MainContent.Content = new CadastrarDepartamento();
-        //}
+        private void CadastrarDepartamento(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new CadastrarDepartamento();
+        }
 
         //private void ConsultaDepartamento(object sender, RoutedEventArgs e)
         //{

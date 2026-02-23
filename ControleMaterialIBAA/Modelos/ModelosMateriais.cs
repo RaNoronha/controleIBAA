@@ -16,6 +16,8 @@ namespace ControleMaterialIBAA.Modelos
         public string aquisicao { get; set; }        
         public string responsavel { get; set; }
         public DateTime dtVerificacao { get; set; }
-        public bool ativo { get; set; }
+        public bool ativo { get; set; } = true;
+
+        public ICollection<ModelosMovimentacoes> movimentacoes { get; set; } = new List<ModelosMovimentacoes>();
     }
 }

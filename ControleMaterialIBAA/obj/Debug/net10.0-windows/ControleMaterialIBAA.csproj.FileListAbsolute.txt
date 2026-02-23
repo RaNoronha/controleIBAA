@@ -124,3 +124,5 @@ C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debu
 C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\TelaPrincipal.baml
 C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\Paginas\CadastrarMaterial.g.cs
 C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\TelaPrincipal.g.cs
+C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\Paginas\CadastrarDepartamento.baml
+C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\Paginas\CadastrarDepartamento.g.cs
