@@ -1,49 +1,59 @@
 ﻿<Window x:Class="ControleMaterialIBAA.View.TelaPrincipal"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:ControleMaterialIBAA.View.Paginas"
+        xmlns:views="clr-namespace:ControleMaterialIBAA.View.Paginas"
         Title="Controle de Materiais - IBAA"
-        Height="576" Width="1080">
+        Height="576" Width="1080"
+        WindowState="Maximized">
 
-    <Grid Margin="0,0,0,21">
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="43*"/>
-            <ColumnDefinition Width="163*"/>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- MENU -->
-        <StackPanel Background="DarkSeaGreen" Grid.Column="0" RenderTransformOrigin="0.498,0.77" Margin="0,0,0,-20">
-            
-            <TextBlock x:Name="TxtBemVindo"
-               FontSize="16"
-               FontWeight="Bold"
-               Foreground="Black"
-               Margin="5"                       
-               Text="Bem-vindo"/>
-            
-            <Button Content="Cadastrar Material"
-                    Click="BtnCadastro_Click" 
-                    Height="50" Margin="20" 
-                    FontFamily="Carlito" 
-                    FontWeight="Bold"/>
-            
-            <Button Content="Buscar Materiais"
-                    Click="BtnBuscar_Click" 
-                    Height="50"  
-                    Margin="20" 
-                    FontFamily="Carlito" 
-                    FontWeight="Bold"/>
-            
-            <Button Content="Excluir Material"
-                    Click="BtnExcluir_Click" 
-                    Height="50" 
-                    Margin="20" 
-                    FontFamily="Carlito" 
-                    FontWeight="Bold"/>
-        </StackPanel>
+        <!-- MENU LATERAL -->
+        <Grid Grid.Column="0" Background="DarkSeaGreen">
 
-        <!-- CONTEÚDO DINÂMICO -->
-        <ContentControl x:Name="MainContent"
-                        Grid.Column="1"
-                        Margin="10,10,10,10"/>
+            <DockPanel>
+
+                <!-- TÍTULO -->
+                <TextBlock x:Name="TxtBemVindo"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       Margin="15"
+                       DockPanel.Dock="Top"/>
+
+                <!-- MENU -->
+                <TreeView Background="DarkSeaGreen"
+                      BorderThickness="0"
+                      Foreground="White">
+
+                    <!-- MATERIAIS -->
+                    <TreeViewItem Header="📦 MATERIAIS"
+                                  FontSize="18"
+                                  FontFamily="Bahnschrift"
+                                  FontWeight="Bold"                                  >
+                        <TreeViewItem Header="Cadastrar"
+                                      Margin="25,0,0,0"
+                                      FontFamily="Verdana"
+                                      FontSize="14"
+                                      Selected="CadastrarMaterial"/>
+                        
+                    </TreeViewItem>
+
+
+                </TreeView>
+
+            </DockPanel>
+        </Grid>
+
+        <!-- CONTEÚDO -->
+            <ContentControl  x:Name="MainContent"
+                    Grid.Column="1"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"/>
     </Grid>
 </Window>

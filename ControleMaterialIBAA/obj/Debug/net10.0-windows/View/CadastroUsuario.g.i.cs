@@ -77,7 +77,7 @@ namespace ControleMaterialIBAA.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ControleMaterialIBAA;V1.0.0.0;component/view/cadastrousuario.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ControleMaterialIBAA;component/view/cadastrousuario.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\CadastroUsuario.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

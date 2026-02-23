@@ -21,6 +21,12 @@ namespace ControleMaterialIBAA.View.Paginas
         public CadastrarMaterial()
         {
             InitializeComponent();
+            
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

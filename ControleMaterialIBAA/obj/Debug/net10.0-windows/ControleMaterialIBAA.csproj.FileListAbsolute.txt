@@ -120,3 +120,7 @@ C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debu
 C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\ref\ControleMaterialIBAA.dll
 C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\CadastroUsuario.g.cs
 C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\CadastroUsuario.baml
+C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\Paginas\CadastrarMaterial.baml
+C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\TelaPrincipal.baml
+C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\Paginas\CadastrarMaterial.g.cs
+C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\TelaPrincipal.g.cs

@@ -3,6 +3,7 @@ using ControleMaterialIBAA.Servicos;
 using ControleMaterialIBAA.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -40,24 +41,48 @@ namespace ControleMaterialIBAA.View
                 return;
             }
 
-            var servico = new ServicoUsuarios();
-            var usuarioModel = await servico.LoginAsync(usuario, senha);
-
-            if (usuarioModel == null)
+            try
             {
-                MessageBox.Show("Usuário ou senha inválidos ou usuário não cadastrado",
-                                "Login não autorizado",
+                var servico = new ServicoUsuarios();
+                var usuarioModel = await servico.LoginAsync(usuario, senha);
+
+                if (usuarioModel == null)
+                {
+                    MessageBox.Show("Usuário ou senha inválidos ou usuário não cadastrado",
+                                    "Login não autorizado",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+                    return;
+                }
+
+                var usuarioVM = ViewModelUsuario.FromModel(usuarioModel);
+                Sessao.Login(usuarioVM);
+
+                var telaPrincipal = new TelaPrincipal(usuarioVM.Usuario);
+                telaPrincipal.Show();
+                this.Close();
+            }
+            catch (HttpRequestException)
+            {
+                MessageBox.Show("Não foi possível comunicar com o servidor.\nVerifique sua conexão ou entre em contato com o admnistrador.",
+                                "Erro de Comunicação",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
-                return;
             }
-
-            var usuarioVM = ViewModelUsuario.FromModel(usuarioModel);
-            Sessao.Login(usuarioVM);
-
-            var telaPrincipal = new TelaPrincipal(usuarioVM.Usuario);
-            telaPrincipal.Show();
-            this.Close();
+            catch (TaskCanceledException)
+            {
+                MessageBox.Show("Tempo de resposta do servidor excedido.",
+                                "Servidor não respondeu",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro inesperado:\n{ex.Message}",
+                                "Erro",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+            }
         }
         #endregion
 

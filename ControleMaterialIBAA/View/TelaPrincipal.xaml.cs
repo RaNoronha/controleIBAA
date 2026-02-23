@@ -24,19 +24,34 @@ namespace ControleMaterialIBAA.View
             TxtBemVindo.Text = $"Bem-vindo, {nomeUsuario}";
         }
 
-        private void BtnCadastro_Click(object sender, RoutedEventArgs e)
+        private void CadastrarMaterial(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new CadastrarMaterial();
         }
 
-        private void BtnBuscar_Click(object sender, RoutedEventArgs e)
-        {
-            MainContent.Content = new BuscaMaterial();
-        }
+        //private void ConsultarMaterial(object sender, RoutedEventArgs e)
+        //{
+        //    MainContent.Content = new ConsultarMaterial();
+        //}
 
-        private void BtnExcluir_Click(object sender, RoutedEventArgs e)
-        {
-            MainContent.Content = new ExclusaoMaterial();
-        }
+        //private void ExcluirMaterial(object sender, RoutedEventArgs e)
+        //{
+        //    MainContent.Content = new ExcluirMaterial();
+        //}
+
+        //private void CadastrarDepartamento(object sender, RoutedEventArgs e)
+        //{
+        //    MainContent.Content = new CadastrarDepartamento();
+        //}
+
+        //private void ConsultaDepartamento(object sender, RoutedEventArgs e)
+        //{
+        //    MainContent.Content = new ConsultaDepartamento();
+        //}
+
+        //private void ExcluirDepartamento(object sender, RoutedEventArgs e)
+        //{
+        //    MainContent.Content = new ExcluirDepartamento();
+        //}
     }
 }
