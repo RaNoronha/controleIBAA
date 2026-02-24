@@ -2,18 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ControleMaterialIBAA.Modelos
+namespace ControleMaterialIBAA.DTO
 {
-    public class ModelosSubDepartamentos
+    public class DepartamentoDTO
     {
         public Guid id { get; set; }
-
         public string nome { get; set; }
-
         public bool ativo { get; set; } = true;
-
-        public Guid departamentoId { get; set; }
-
     }
-
 }

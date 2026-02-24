@@ -52,7 +52,7 @@ namespace ControleMaterialIBAA.Servicos
                 var json = JsonConvert.SerializeObject(subdepartamento);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = await _http.PostAsync($"{Conexao.BaseUrl}/departamentos", content);
+                var response = await _http.PostAsync($"{Conexao.BaseUrl}/sub_departamentos", content);
 
                 return response.IsSuccessStatusCode;
             }

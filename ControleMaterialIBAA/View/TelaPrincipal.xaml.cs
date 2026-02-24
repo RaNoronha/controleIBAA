@@ -44,6 +44,11 @@ namespace ControleMaterialIBAA.View
             MainContent.Content = new CadastrarDepartamento();
         }
 
+        private void CadastrarSubDepartamento(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new CadastrarSubDepartamento();
+        }
+
         //private void ConsultaDepartamento(object sender, RoutedEventArgs e)
         //{
         //    MainContent.Content = new ConsultaDepartamento();

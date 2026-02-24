@@ -1,4 +1,5 @@
 ﻿using ControleMaterialIBAA.Config;
+using ControleMaterialIBAA.DTO;
 using ControleMaterialIBAA.Modelos;
 using Newtonsoft.Json;
 using System;
@@ -46,7 +47,7 @@ namespace ControleMaterialIBAA.Servicos
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task<bool> CriarAsync(ModelosDepartamentos departamento)
+        public async Task<bool> CriarAsync(DepartamentoDTO departamento)
         {
             try
             {

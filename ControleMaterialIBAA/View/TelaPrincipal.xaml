@@ -50,12 +50,25 @@
                                   FontSize="18"
                                   FontFamily="Bahnschrift"                                         
                                   FontWeight="Bold">
+                        
                         <TreeViewItem Header="Cadastrar"
                                       Margin="25,0,0,0"
                                       FontFamily="Verdana"
                                       FontSize="14"
                                       Selected="CadastrarDepartamento"/>
-                       
+                    </TreeViewItem>
+                    
+                    <!-- SUB-DEPARTAMENTOS -->
+                    <TreeViewItem Header="📁 SUB-DEPARTAMENTOS"
+                                  FontSize="18"
+                                  FontFamily="Bahnschrift"                                         
+                                  FontWeight="Bold">
+
+                        <TreeViewItem Header="Cadastrar"
+                                      Margin="25,0,0,0"
+                                      FontFamily="Verdana"
+                                      FontSize="14"
+                                      Selected="CadastrarSubDepartamento"/>   
                     </TreeViewItem>
 
 
