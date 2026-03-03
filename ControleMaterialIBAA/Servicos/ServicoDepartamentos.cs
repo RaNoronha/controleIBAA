@@ -38,6 +38,20 @@ namespace ControleMaterialIBAA.Servicos
             return lista?.FirstOrDefault();
         }
 
+        public async Task<DepartamentoDTO?> ObterPorCodigoAsync(int codigo)
+        {
+            var url = $"{Conexao.BaseUrl}/departamentos" +
+                      $"?cod=eq.{codigo}" +                    
+                      $"&limit=1";
+
+            var response = await _http.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+            var lista = JsonConvert.DeserializeObject<List<DepartamentoDTO>>(json);
+
+            return lista?.FirstOrDefault();
+        }
         public async Task AtualizarAsync(Guid id, ModelosDepartamentos departamento)
         {
             var json = JsonConvert.SerializeObject(departamento);

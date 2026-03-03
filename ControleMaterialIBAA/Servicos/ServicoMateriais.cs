@@ -47,13 +47,21 @@ namespace ControleMaterialIBAA.Servicos
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task CriarAsync(ModelosMateriais material)
+        public async Task<bool> CriarAsync(List<ModelosMateriais> materiais)
         {
-            var json = JsonConvert.SerializeObject(material);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            try
+            {
+                var json = JsonConvert.SerializeObject(materiais);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _http.PostAsync($"{Conexao.BaseUrl}/materiais", content);
-            response.EnsureSuccessStatusCode();
+                var response = await _http.PostAsync($"{Conexao.BaseUrl}/materiais", content);
+
+                return response.IsSuccessStatusCode;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public async Task InativarAsync(Guid id)

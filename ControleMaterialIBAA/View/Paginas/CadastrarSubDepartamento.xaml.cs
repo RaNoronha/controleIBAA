@@ -45,19 +45,48 @@ namespace ControleMaterialIBAA.View.Paginas
             Guid departamentoId = (Guid)CmbDepartamentos.SelectedValue;
 
             string nomeSub = TxtSubDepartamento.Text.Trim();
+            int codigo = int.Parse(TxtCod.Text);           
 
             var sub = new ModelosSubDepartamentos()
             {
                 id = Guid.NewGuid(),
                 nome = nomeSub,
                 departamentoId = departamentoId,
+                cod = codigo,
                 ativo = true
             };
 
             var servicoSub = new ServicoSubDepartamentos();
+
+            var existente = await servicoSub.ObterPorCodigoAsync(codigo, departamentoId);
+
+            if (existente != null)
+            {
+                MessageBox.Show("Já existe um subdepartamento com esse código.");
+                return;
+            }
+
             await servicoSub.CriarAsync(sub);
 
             MessageBox.Show("Subdepartamento cadastrado com sucesso!");
+            LimparCampos(this);
+        }
+
+        private void LimparCampos(DependencyObject parent)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+
+                if (child is TextBox textBox)
+                    textBox.Clear();
+
+                else if (child is ComboBox comboBox)
+                    comboBox.SelectedIndex = -1;
+
+                // Recursivo (entra dentro de Grid, StackPanel, etc)
+                LimparCampos(child);
+            }
         }
     }
 }

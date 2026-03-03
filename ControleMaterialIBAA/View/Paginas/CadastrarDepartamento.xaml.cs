@@ -31,7 +31,8 @@ namespace ControleMaterialIBAA.View.Paginas
 
         private async void BtnSalvar_Click(object sender, RoutedEventArgs e)
         {
-            string nomeDepartamento = TxtDepartamento.Text.Trim().ToLower();            
+            string nomeDepartamento = TxtDepartamento.Text.Trim().ToLower();
+            int codigo = int.Parse(TxtCod.Text);
 
             if (string.IsNullOrEmpty(nomeDepartamento))
             {
@@ -45,8 +46,17 @@ namespace ControleMaterialIBAA.View.Paginas
             {
                 id = Guid.NewGuid(),
                 nome = nomeDepartamento,
+                cod = codigo,
                 ativo = true
             };
+
+            var existente = await servico.ObterPorCodigoAsync(codigo);
+
+            if (existente != null)
+            {
+                MessageBox.Show("Já existe um departamento com esse código.");
+                return;
+            }
 
             bool sucessoDepartamento = await servico.CriarAsync(departamento);
 
@@ -56,7 +66,21 @@ namespace ControleMaterialIBAA.View.Paginas
                 return;
             }
 
-            MessageBox.Show("Cadastro realizado com sucesso!");           
+            MessageBox.Show("Cadastro realizado com sucesso!");
+            LimparCampos(this);
+        }
+        private void LimparCampos(DependencyObject parent)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+
+                if (child is TextBox textBox)
+                    textBox.Clear();              
+
+                // Recursivo (entra dentro de Grid, StackPanel, etc)
+                LimparCampos(child);
+            }
         }
     }
 }

@@ -25,9 +25,38 @@ namespace ControleMaterialIBAA.Servicos
             return JsonConvert.DeserializeObject<List<ModelosSubDepartamentos>>(json);
         }
 
+        public async Task<List<ModelosSubDepartamentos>>ListarPorDepartamentoAsync(Guid departamentoId)
+        {
+            var url = $"{Conexao.BaseUrl}/sub_departamentos" +
+                      $"?departamentoId=eq.{departamentoId}" +
+                      $"&ativo=eq.true";
+
+            var response = await _http.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<ModelosSubDepartamentos>>(json);
+        }
+
         public async Task<ModelosSubDepartamentos?> ObterAsync(int id)
         {
             var response = await _http.GetAsync($"{Conexao.BaseUrl}/sub_departamentos?id=eq.{id}&limit=1");
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+            var lista = JsonConvert.DeserializeObject<List<ModelosSubDepartamentos>>(json);
+
+            return lista?.FirstOrDefault();
+        }
+
+        public async Task<ModelosSubDepartamentos?> ObterPorCodigoAsync(int codigo, Guid departamentoId)
+        {
+            var url = $"{Conexao.BaseUrl}/sub_departamentos" +
+                      $"?cod=eq.{codigo}" +
+                      $"&departamentoId=eq.{departamentoId}" +
+                      $"&limit=1";
+
+            var response = await _http.GetAsync(url);
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStringAsync();

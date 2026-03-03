@@ -29,10 +29,10 @@ namespace ControleMaterialIBAA.View
             MainContent.Content = new CadastrarMaterial();
         }
 
-        //private void ConsultarMaterial(object sender, RoutedEventArgs e)
-        //{
-        //    MainContent.Content = new ConsultarMaterial();
-        //}
+        private void GerenciarMaterial(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new GerenciarMaterial();
+        }
 
         //private void ExcluirMaterial(object sender, RoutedEventArgs e)
         //{

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Windows.Media.Media3D;
 
 namespace ControleMaterialIBAA.Servicos
 {
@@ -45,13 +46,21 @@ namespace ControleMaterialIBAA.Servicos
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task CriarAsync(ModelosMovimentacoes material)
+        public async Task<bool> CriarAsync(ModelosMovimentacoes movimentacao)
         {
-            var json = JsonConvert.SerializeObject(material);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            try
+            {
+                var json = JsonConvert.SerializeObject(movimentacao);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _http.PostAsync($"{Conexao.BaseUrl}/movimentacoes", content);
-            response.EnsureSuccessStatusCode();
+                var response = await _http.PostAsync($"{Conexao.BaseUrl}/movimentacoes", content);
+
+                return response.IsSuccessStatusCode;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public async Task InativarAsync(Guid id)

@@ -8,6 +8,7 @@ namespace ControleMaterialIBAA.DTO
     {
         public Guid id { get; set; }
         public string nome { get; set; }
-        public bool ativo { get; set; } = true;
+        public bool ativo { get; set; } = true;        
+        public int cod { get; set; }
     }
 }

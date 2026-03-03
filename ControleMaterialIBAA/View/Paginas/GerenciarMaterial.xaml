@@ -1,0 +1,129 @@
+﻿<UserControl x:Class="ControleMaterialIBAA.View.Paginas.GerenciarMaterial"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"            
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
+
+    <StackPanel HorizontalAlignment="Center"
+            Width="1100"
+            Background="#6F9C9C">
+
+        <!-- ================= FILTROS EM UMA LINHA ================= -->
+        <Grid Background="#6F9C9C" Margin="0,0,0,15">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="99"/>
+
+                <ColumnDefinition Width="191"/>
+                <ColumnDefinition Width="180"/>
+
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="180"/>
+
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="180"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Nº Patrimonial -->
+            <TextBlock Text="Nº Patrimonial:"
+               VerticalAlignment="Center"
+               FontWeight="Bold" Height="16"/>
+
+            <TextBox x:Name="TxtNumPat"
+             Margin="96,5,34,5" Grid.ColumnSpan="2"/>
+
+            <!-- Departamento -->
+            <TextBlock
+               Grid.Column="2"
+               VerticalAlignment="Center"
+               FontWeight="Bold" Margin="0,0,150,0" Height="16"><Run Text="Dep"/><Run Language="pt-br" Text="to"/><Run Text=":"/></TextBlock>
+
+            <ComboBox x:Name="CmbDepartamentos"
+              Grid.Column="2"
+              Margin="46,5,130,5"
+              DisplayMemberPath="nome"
+              SelectedValuePath="id"
+              SelectionChanged="CmbDepartamentos_SelectionChanged" Grid.ColumnSpan="2"/>
+
+            <!-- SubDepartamento -->
+            <TextBlock Text="SubDepto:"
+               Grid.Column="3"
+               VerticalAlignment="Center"
+               FontWeight="Bold" Margin="90,0,90,0" Height="16" Grid.ColumnSpan="2"/>
+
+            <ComboBox x:Name="CmbSubDepartamentos"
+              Grid.Column="3"
+              Margin="160,5,160,5"
+              DisplayMemberPath="nome"
+              SelectedValuePath="id" Grid.ColumnSpan="3"/>
+
+            <!-- Tipo Material -->
+            <TextBlock Text="Tipo Material:"
+               Grid.Column="5"
+               VerticalAlignment="Center"
+               FontWeight="Bold" Margin="40,0,30,0" Height="16"/>
+
+            <ComboBox x:Name="CmbTipoMaterial"
+              Grid.Column="5"
+              Margin="150,5,150,5" Grid.ColumnSpan="3"/>
+        </Grid>
+
+        <!-- ================= BOTÃO PESQUISAR ================= -->
+        <Grid Background="#6F9C9C"
+             
+              Height="20">  
+
+            <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+                <Button Content="Pesquisar"
+                Click="BtnPesquisar_Click"/>
+
+                <Button Content="Excluir Selecionados"
+                Background="#A94442"
+                Click="BtnExcluir_Click"/>
+            </StackPanel>
+
+        </Grid>
+        <!-- ================= LISTAGEM ================= -->
+        <DataGrid x:Name="DgMateriais"
+              AutoGenerateColumns="False"
+              Height="350"
+              CanUserAddRows="False"
+              SelectionMode="Extended"
+              Margin="0,10,0,0">
+
+            <DataGrid.Columns>
+
+                <!-- Checkbox -->
+                <DataGridCheckBoxColumn Header="Selecionar"
+                                    Binding="{Binding Selecionado}"
+                                    Width="90"/>
+
+                <DataGridTextColumn Header="Nº Patrimonial"
+                                Binding="{Binding numPat}"
+                                Width="150"/>
+
+                <DataGridTextColumn Header="Tipo"
+                                Binding="{Binding tipo}"
+                                Width="150"/>
+
+                <DataGridTextColumn Header="Departamento"
+                                Binding="{Binding departamentoNome}"
+                                Width="180"/>
+
+                <DataGridTextColumn Header="SubDepto"
+                                Binding="{Binding subDepartamentoNome}"
+                                Width="180"/>
+
+                <DataGridTextColumn Header="Responsável"
+                                Binding="{Binding responsavel}"
+                                Width="150"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </StackPanel>
+</UserControl>

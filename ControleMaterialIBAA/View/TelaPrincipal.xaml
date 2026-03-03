@@ -42,7 +42,12 @@
                                       FontFamily="Verdana"
                                       FontSize="14"
                                       Selected="CadastrarMaterial"/>
-                        
+                        <TreeViewItem Header="Pesquisar/Excluir"
+                                      Margin="25,0,0,0"
+                                      FontFamily="Verdana"
+                                      FontSize="14"
+                                      Selected="GerenciarMaterial"/>    
+
                     </TreeViewItem>
 
                     <!-- DEPARTAMENTOS -->
