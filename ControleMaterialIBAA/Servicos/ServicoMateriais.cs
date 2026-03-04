@@ -1,4 +1,5 @@
 ﻿using ControleMaterialIBAA.Config;
+using ControleMaterialIBAA.Enums;
 using ControleMaterialIBAA.Modelos;
 using Newtonsoft.Json;
 using System;
@@ -6,22 +7,49 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Security.Policy;
 using System.Text;
+using System.Windows;
 using System.Windows.Media.Media3D;
 
 namespace ControleMaterialIBAA.Servicos
 {
     public class ServicoMateriais : ServicoBase
-    {     
-        public async Task<List<ModelosMateriais>> ListarAsync(bool ativos = true)
+    {
+        public async Task<List<ModelosMateriais>> ListarAsync(bool ativos = true,string? numeroPatrimonial = null,Guid? departamentoId = null,Guid? subDepartamentoId = null,TipoMaterial? tipo = null)
         {
-            var url = $"{Conexao.BaseUrl}/materiais";
+            var parametros = new List<string>();
 
-            if(ativos)
-            {
-                url += "?ativo=eq.true";
-            }
+            // Agora select é simples porque é VIEW
+            parametros.Add("select=*");
+
+            if (ativos)
+                parametros.Add("ativo=eq.true");
+
+            if (!string.IsNullOrWhiteSpace(numeroPatrimonial))
+                parametros.Add($"numPat=eq.{numeroPatrimonial}");
+
+            if (departamentoId.HasValue)
+                parametros.Add($"departamentoId=eq.{departamentoId}");
+
+            if (subDepartamentoId.HasValue)
+                parametros.Add($"subDepartamentoId=eq.{subDepartamentoId}");
+
+            if (tipo.HasValue)
+                parametros.Add($"tipoMaterial=eq.{(int)tipo.Value}");
+
+            var queryString = "?" + string.Join("&", parametros);
+
+            // 🔥 ALTERAÇÃO AQUI
+            var url = $"{Conexao.BaseUrl}/vw_materiais_consulta{queryString}";
+
             var response = await _http.GetAsync(url);
-            response.EnsureSuccessStatusCode();
+           
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                MessageBox.Show($"Erro: {response.StatusCode}\n\n{content}");
+                throw new Exception(content);
+            }
 
             var json = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<List<ModelosMateriais>>(json);

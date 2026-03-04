@@ -20,7 +20,5 @@ namespace ControleMaterialIBAA.Modelos
         public bool ativo { get; set; } = true;
         public Guid departamentoId { get; set; }
         public Guid subDepartamentoId { get; set; }
-       
-
     }
 }

@@ -1,4 +1,6 @@
-﻿using ControleMaterialIBAA.Servicos;
+﻿using ControleMaterialIBAA.Enums;
+using ControleMaterialIBAA.Modelos;
+using ControleMaterialIBAA.Servicos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,23 +21,49 @@ namespace ControleMaterialIBAA.View.Paginas
     /// </summary>
     public partial class GerenciarMaterial : UserControl
     {
+        private readonly ServicoMateriais _servicoMateriais = new ServicoMateriais();
         public GerenciarMaterial()
         {
             InitializeComponent();
             CarregarDepartamentos();
+            CarregarTipoMaterial();
 
         }
 
         private async void CarregarDepartamentos()
         {
-            var servico = new ServicoDepartamentos();
-            var lista = await servico.ListarAsync();
+            var lista = await ServicoDepartamentos.ListarAsync();
+
+            // 🔹 inserir opção vazia no início
+            lista.Insert(0, new ModelosDepartamentos
+            {
+                id = Guid.Empty,
+                nome = ""
+            });
 
             CmbDepartamentos.ItemsSource = lista;
-            CmbDepartamentos.DisplayMemberPath = "nome";
-            CmbDepartamentos.SelectedValuePath = "id";
+            CmbDepartamentos.SelectedIndex = 0;
         }
 
+        private void CarregarTipoMaterial()
+        {
+            var lista = new List<KeyValuePair<int?, string>>();
+
+            // 🔹 Opção vazia
+            lista.Add(new KeyValuePair<int?, string>(null, ""));
+
+            // 🔹 Enum
+            foreach (TipoMaterial tipo in Enum.GetValues(typeof(TipoMaterial)))
+            {
+                lista.Add(new KeyValuePair<int?, string>((int)tipo, tipo.ToString()));
+            }
+
+            CmbTipoMaterial.ItemsSource = lista;
+            CmbTipoMaterial.DisplayMemberPath = "Value";
+            CmbTipoMaterial.SelectedValuePath = "Key";
+
+            CmbTipoMaterial.SelectedIndex = 0; // começa vazio
+        }
         private async void CmbDepartamentos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (CmbDepartamentos.SelectedValue == null)
@@ -47,6 +75,26 @@ namespace ControleMaterialIBAA.View.Paginas
             var listaSub = await servicoSub.ListarPorDepartamentoAsync(departamentoId);
 
             CmbSubDepartamentos.ItemsSource = listaSub;
+        }
+
+        private async void BtnPesquisar_Click(object sender, RoutedEventArgs e)
+        {
+            
+        var numeroPat = TxtNumPat.Text?.Trim();
+
+            var departamentoId = CmbDepartamentos.SelectedValue as Guid?;
+            var subDepartamentoId = CmbSubDepartamentos.SelectedValue as Guid?;
+            var tipo = CmbTipoMaterial.SelectedItem as TipoMaterial?;
+
+            var lista = await _servicoMateriais.ListarAsync(
+                ativos: true,
+                numeroPatrimonial: numeroPat,
+                departamentoId: departamentoId,
+                subDepartamentoId: subDepartamentoId,
+                tipo: tipo
+            );
+
+            DgMateriais.ItemsSource = lista;
         }
     }
 }
