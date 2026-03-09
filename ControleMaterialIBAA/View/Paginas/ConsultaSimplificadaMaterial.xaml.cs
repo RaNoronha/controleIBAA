@@ -1,7 +1,6 @@
 ﻿using ControleMaterialIBAA.Enums;
 using ControleMaterialIBAA.Modelos;
 using ControleMaterialIBAA.Servicos;
-using ControleMaterialIBAA.View.Janelas;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,17 +17,16 @@ using System.Windows.Shapes;
 namespace ControleMaterialIBAA.View.Paginas
 {
     /// <summary>
-    /// Interação lógica para GerenciarMaterial.xam
+    /// Interação lógica para ConsultaSimplificadaMaterial.xam
     /// </summary>
-    public partial class GerenciarMaterial : UserControl
+    public partial class ConsultaSimplificadaMaterial : UserControl
     {
         private readonly ServicoMateriais _servicoMateriais = new ServicoMateriais();
-        public GerenciarMaterial()
+        public ConsultaSimplificadaMaterial()
         {
             InitializeComponent();
             CarregarDepartamentos();
             CarregarTipoMaterial();
-
         }
 
         private async void CarregarDepartamentos()
@@ -66,67 +64,32 @@ namespace ControleMaterialIBAA.View.Paginas
 
             CmbTipoMaterial.SelectedIndex = 0; // começa vazio
         }
-        private async void CmbDepartamentos_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (CmbDepartamentos.SelectedValue == null)
-                return;
-
-            Guid departamentoId = (Guid)CmbDepartamentos.SelectedValue;
-
-            var servicoSub = new ServicoSubDepartamentos();
-            var listaSub = await servicoSub.ListarPorDepartamentoAsync(departamentoId);
-
-            CmbSubDepartamentos.ItemsSource = listaSub;
-        }
 
         private async void BtnPesquisar_Click(object sender, RoutedEventArgs e)
         {
 
-            var numeroPat = TxtNumPat.Text?.Trim();
-
-            Guid? departamentoId = null;
-            Guid? subDepartamentoId = null;
+            var material = TxtMaterial.Text?.Trim();
+            TipoMaterial? tipo = null;
+            Guid? departamentoId = null;           
 
             if (CmbDepartamentos.SelectedValue is Guid dep && dep != Guid.Empty)
+            {
                 departamentoId = dep;
-
-            if (CmbSubDepartamentos.SelectedValue is Guid sub && sub != Guid.Empty)
-                subDepartamentoId = sub;
-
-            TipoMaterial? tipo = null;
+            }           
 
             if (CmbTipoMaterial.SelectedValue != null)
+            {
                 tipo = (TipoMaterial)CmbTipoMaterial.SelectedValue;
+            }
+                
 
-            var lista = await _servicoMateriais.ListarAsync(
-                ativos: true,
-                numeroPatrimonial: numeroPat,
-                departamentoId: departamentoId,
-                subDepartamentoId: subDepartamentoId,
+            var lista = await _servicoMateriais.ConsultaResumidaAsync(               
+                material: material,
+                departamentoId: departamentoId,                
                 tipo: tipo
             );
 
             DgMateriais.ItemsSource = lista;
-        }
-
-        private void BtnBaixa_Click(object sender, RoutedEventArgs e)
-        {
-            var selecionados = ((List<ModelosMateriais>)DgMateriais.ItemsSource)
-                                .Where(x => x.Selecionado)
-                                .ToList();
-
-            if (!selecionados.Any())
-            {
-                MessageBox.Show("Selecione pelo menos um material para dar baixa.");
-                return;
-            }
-
-            var popup = new PopupBaixaMaterial(selecionados);
-
-            popup.ShowDialog();
-
-            // opcional: atualizar lista depois da baixa
-            BtnPesquisar_Click(null, null);
         }
     }
 }

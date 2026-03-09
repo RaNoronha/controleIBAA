@@ -63,19 +63,22 @@ namespace ControleMaterialIBAA.Servicos
             }
         }
 
-        public async Task InativarAsync(Guid id)
+        public async Task RegistrarMovimentacaoAsync(ModelosMovimentacoes mov)
         {
-            var json = JsonConvert.SerializeObject(new { ativo = false });
+            var json = JsonConvert.SerializeObject(mov);
+
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _http.PatchAsync($"{Conexao.BaseUrl}/movimentacoes?id=eq.{id}", content);
-            response.EnsureSuccessStatusCode();
-        }
+            var response = await _http.PostAsync($"{Conexao.BaseUrl}/movimentacoes", content);
 
-        public async Task ExcluirAsync(Guid id)
-        {
-            var response = await _http.DeleteAsync($"{Conexao.BaseUrl}/movimentacoes?id=eq.{id}");
-            response.EnsureSuccessStatusCode();
+            var resp = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(resp);
+            }
+
         }
+       
     }
 }

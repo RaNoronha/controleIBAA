@@ -1,4 +1,4 @@
-﻿<Window x:Class="ControleMaterialIBAA.View.TelaPrincipal"
+﻿<Window x:Class="ControleMaterialIBAA.View.Janelas.TelaPrincipal"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:ControleMaterialIBAA.View.Paginas"
@@ -42,11 +42,16 @@
                                       FontFamily="Verdana"
                                       FontSize="14"
                                       Selected="CadastrarMaterial"/>
-                        <TreeViewItem Header="Pesquisar/Excluir"
+                        <TreeViewItem Header="Gerenciar Materiais"
                                       Margin="25,0,0,0"
                                       FontFamily="Verdana"
                                       FontSize="14"
-                                      Selected="GerenciarMaterial"/>    
+                                      Selected="GerenciarMaterial"/>
+                        <TreeViewItem Header="Consulta Resumida"
+                                      Margin="25,0,0,0"
+                                      FontFamily="Verdana"
+                                      FontSize="14"
+                                      Selected="ConsultaResumida"/>    
 
                     </TreeViewItem>
 

@@ -1,0 +1,65 @@
+﻿<Window x:Class="ControleMaterialIBAA.View.Janelas.PopupBaixaMaterial"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Baixa de Material"
+        Height="420"
+        Width="420"
+        Background="#E8F0F0"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Título -->
+        <TextBlock Text="Materiais Selecionados"
+                   FontWeight="Bold"
+                   FontSize="14"
+                   Foreground="#2F4F4F"/>
+
+        <!-- Lista de materiais -->
+        <ListBox x:Name="LstMateriais"
+                 Grid.Row="1"
+                 Margin="0,5,0,10"/>
+
+        <!-- Tipo de baixa -->
+        <TextBlock Text="Tipo de Baixa"
+                   Grid.Row="2"
+                   FontWeight="Bold"/>
+
+        <ComboBox x:Name="CmbTipoMovimentacao"
+                  Grid.Row="3"
+                  Margin="0,5,0,10"/>
+
+        <!-- Observação -->
+        <StackPanel Grid.Row="4">
+
+            <TextBlock Text="Observação"
+                       FontWeight="Bold"/>
+
+            <TextBox x:Name="TxtObservacao"
+                     Height="70"
+                     TextWrapping="Wrap"
+                     Margin="0,5,0,10"/>
+
+            <Button Content="Confirmar Baixa"
+                    Width="160"
+                    Height="35"
+                    HorizontalAlignment="Center"
+                    Background="#3E6F6F"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    BorderThickness="0"
+                    Click="BtnConfirmar_Click"/>
+
+        </StackPanel>
+
+    </Grid>
+</Window>

@@ -116,16 +116,19 @@
             Background="#3E6F6F"
             Foreground="White"
             BorderThickness="0"
-            Margin="1" Click="BtnPesquisar_Click"/>
+            Margin="1" 
+            Click="BtnPesquisar_Click"/>
 
-                <Button Content="Excluir"
+            <Button Content="Baixa"
             Width="100"
             Height="30"
             FontWeight="Bold"
             Background="#A94442"
             Foreground="White"
             BorderThickness="0"
-            Margin="10"/>
+            Margin="10"
+            Click="BtnBaixa_Click"/>
+
             </StackPanel>
 
             <!-- ================= LISTAGEM ================= -->
@@ -138,9 +141,15 @@
 
                 <DataGrid.Columns>
 
-                    <DataGridCheckBoxColumn Header="Selecionar"
-                                            Binding="{Binding Selecionado}"
-                                            Width="90"/>
+                    <DataGridTemplateColumn Header="Selecionar" Width="90">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Selecionado, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
                     <DataGridTextColumn Header="Nº Patrimonial"
                                         Binding="{Binding numPat}"
@@ -163,7 +172,7 @@
                                         Width="150"/>
                     <DataGridTextColumn Header="Tipo"
                                         Binding="{Binding tipoMaterial}"
-                                        Width="150"/>
+                                        Width="*"/>
 
                 </DataGrid.Columns>
             </DataGrid>

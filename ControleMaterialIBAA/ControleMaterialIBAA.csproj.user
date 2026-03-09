@@ -2,7 +2,10 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="View\CadastroUsuario.xaml.cs">
+    <Compile Update="View\Janelas\CadastroUsuario.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Janelas\PopupBaixaMaterial.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Paginas\CadastrarDepartamento.xaml.cs">
@@ -14,10 +17,13 @@
     <Compile Update="View\Paginas\CadastrarSubDepartamento.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Paginas\ConsultaSimplificadaMaterial.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Paginas\GerenciarMaterial.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\TelaPrincipal.xaml.cs">
+    <Compile Update="View\Janelas\TelaPrincipal.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ControleMaterialIBAA.View
+namespace ControleMaterialIBAA.View.Janelas
 {
     /// <summary>
     /// Lógica interna para CadastroUsuario.xaml

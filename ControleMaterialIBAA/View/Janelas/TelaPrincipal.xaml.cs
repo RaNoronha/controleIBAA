@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ControleMaterialIBAA.View
+namespace ControleMaterialIBAA.View.Janelas
 {
     /// <summary>
     /// Lógica interna para TelaPrincipal.xaml
@@ -32,6 +32,11 @@ namespace ControleMaterialIBAA.View
         private void GerenciarMaterial(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new GerenciarMaterial();
+        }
+
+        private void ConsultaResumida(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new ConsultaSimplificadaMaterial();
         }
 
         //private void ExcluirMaterial(object sender, RoutedEventArgs e)
