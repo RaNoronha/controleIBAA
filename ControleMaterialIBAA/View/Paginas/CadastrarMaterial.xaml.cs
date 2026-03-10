@@ -103,7 +103,7 @@ namespace ControleMaterialIBAA.View.Paginas
                     descricao = TxtDescricao.Text.Trim(),
                     marca = TxtMarcaModelo.Text.Trim(),
                     tipoMaterial = (TipoMaterial)CmbTipoMaterial.SelectedItem,
-                    numPat = ((TipoMaterial)CmbTipoMaterial.SelectedItem == TipoMaterial.Duravel)?NPAutomatico.Gerar() : null,
+                    numPat = ((TipoMaterial)CmbTipoMaterial.SelectedItem == TipoMaterial.Durável)?NPAutomatico.Gerar() : null,
                     valorUnitario = valor,                   
                     aquisicao = (FormaAquisicao)CmbAquisicao.SelectedItem,                    
                     responsavel = TxtResponsavel.Text.Trim(),

@@ -14,6 +14,7 @@ namespace ControleMaterialIBAA.Modelos
         public TipoMovimentacao tipo { get; set; }             
         public Guid usuario_id { get; set; }
         public DateTime dtmovimentacao { get; set; }
+        public string observacao { get; set; }
     }
 
 

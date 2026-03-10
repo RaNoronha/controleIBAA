@@ -1,0 +1,96 @@
+﻿<Window x:Class="ControleMaterialIBAA.View.Janelas.PopupTransferenciaMaterial"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Transferência de Material"
+        Height="599"
+        Width="420"
+        Background="#E8F0F0"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Materiais -->
+        <TextBlock Text="Materiais Selecionados"
+                   FontWeight="Bold"
+                   FontSize="14"
+                   Foreground="#2F4F4F"/>
+
+        <ListBox x:Name="LstMateriais"
+                 Grid.Row="1"
+                 Margin="0,5,0,10"
+                 SelectionChanged="LstMateriais_SelectionChanged"/>
+
+        <!-- Departamento atual -->
+        <StackPanel Grid.Row="2" Margin="0,5">
+            <TextBlock Text="Departamento Atual" FontWeight="Bold"/>
+            <TextBox x:Name="TxtDepartamentoOrigem" IsReadOnly="True"/>
+        </StackPanel>
+
+        <!-- SubDepartamento atual -->
+        <StackPanel Grid.Row="3" Margin="0,5">
+            <TextBlock Text="SubDepartamento Atual" FontWeight="Bold"/>
+            <TextBox x:Name="TxtSubDepartamentoOrigem" IsReadOnly="True"/>
+        </StackPanel>
+
+        <!-- Responsável atual -->
+        <StackPanel Grid.Row="4" Margin="0,5">
+            <TextBlock Text="Responsável Atual" FontWeight="Bold"/>
+            <TextBox x:Name="TxtResponsavelOrigem" IsReadOnly="True"/>
+        </StackPanel>
+
+        <!-- Novo departamento -->
+        <StackPanel Grid.Row="5" Margin="0,5">
+            <TextBlock Text="Novo Departamento" FontWeight="Bold"/>
+            <ComboBox x:Name="CmbDepartamentoDestino"
+                      DisplayMemberPath="nome"
+                      SelectedValuePath="id"
+                      SelectionChanged="CmbDepartamentoDestino_SelectionChanged"/>
+        </StackPanel>
+
+        <!-- Novo subdepartamento -->
+        <StackPanel Grid.Row="6" Margin="0,5">
+            <TextBlock Text="Novo SubDepartamento" FontWeight="Bold"/>
+            <ComboBox x:Name="CmbSubDepartamentoDestino"
+                      DisplayMemberPath="nome"
+                      SelectedValuePath="id"/>
+        </StackPanel>
+
+        <!-- Novo responsável + observação -->
+        <StackPanel Grid.Row="7" Margin="0,10,0,0">
+
+            <TextBlock Text="Novo Responsável" FontWeight="Bold"/>
+            <TextBox x:Name="TxtResponsavelDestino"
+                     Margin="0,5,0,10"/>
+
+            <TextBlock Text="Observação" FontWeight="Bold"/>
+            <TextBox x:Name="TxtObservacao"
+                     Height="60"
+                     TextWrapping="Wrap"
+                     Margin="0,5,0,10"/>
+
+            <Button x:Name="BtnConfirmar"
+                    Content="Confirmar Transferência"
+                    Width="200"
+                    Height="35"
+                    HorizontalAlignment="Center"
+                    Background="#3E6F6F"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    BorderThickness="0"
+                    Click="BtnConfirmar_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

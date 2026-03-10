@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
+using ControleMaterialIBAA.DTO;
 
 namespace ControleMaterialIBAA.View.Janelas
 {
@@ -22,16 +23,15 @@ namespace ControleMaterialIBAA.View.Janelas
     /// </summary>
     public partial class PopupBaixaMaterial : Window
     {
-        private List<ModelosMateriais> _materiais;
+        private List<GerenciaDTO> _materiais;
         ServicoMovimentacoes _servicoMov = new ServicoMovimentacoes();
         ServicoMateriais _servicoMateriais = new ServicoMateriais();
 
-        public PopupBaixaMaterial(List<ModelosMateriais> materiais)
+        public PopupBaixaMaterial(List<GerenciaDTO> materiais)
         {
             InitializeComponent();
             _materiais = materiais;
-
-            // Mostrar materiais na lista
+           
             LstMateriais.ItemsSource = materiais;
             LstMateriais.DisplayMemberPath = "material";
 
@@ -42,7 +42,6 @@ namespace ControleMaterialIBAA.View.Janelas
                 TipoMovimentacao.Dano
             };
         }
-
         private async void BtnConfirmar_Click(object sender, RoutedEventArgs e)
         {
             if (CmbTipoMovimentacao.SelectedItem == null)
@@ -64,7 +63,8 @@ namespace ControleMaterialIBAA.View.Janelas
                         departamentoId = material.departamentoId,
                         tipo = tipo,
                         usuario_id = Sessao.UsuarioLogado.Id, // ou Guid fixo se ainda não tiver login
-                        dtmovimentacao = DateTime.Now
+                        dtmovimentacao = DateTime.Now,
+                        observacao = TxtObservacao.Text
                     };
 
                     await _servicoMov.RegistrarMovimentacaoAsync(movimentacao);

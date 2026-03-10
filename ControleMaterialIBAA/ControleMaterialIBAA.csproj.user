@@ -8,6 +8,12 @@
     <Compile Update="View\Janelas\PopupBaixaMaterial.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Janelas\PopupHistoricoMaterial.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Janelas\PopupTransferenciaMaterial.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Paginas\CadastrarDepartamento.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -1,4 +1,5 @@
-﻿using ControleMaterialIBAA.Enums;
+﻿using ControleMaterialIBAA.DTO;
+using ControleMaterialIBAA.Enums;
 using ControleMaterialIBAA.Modelos;
 using ControleMaterialIBAA.Servicos;
 using ControleMaterialIBAA.View.Janelas;
@@ -111,7 +112,18 @@ namespace ControleMaterialIBAA.View.Paginas
 
         private void BtnBaixa_Click(object sender, RoutedEventArgs e)
         {
-            var selecionados = ((List<ModelosMateriais>)DgMateriais.ItemsSource)
+            if (DgMateriais.ItemsSource == null)
+            {
+                MessageBox.Show(
+                    "Realize uma pesquisa antes de tentar dar baixa.",
+                    "Atenção",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+
+                return;
+            }
+
+            var selecionados = ((List<GerenciaDTO>)DgMateriais.ItemsSource)
                                 .Where(x => x.Selecionado)
                                 .ToList();
 
@@ -124,9 +136,46 @@ namespace ControleMaterialIBAA.View.Paginas
             var popup = new PopupBaixaMaterial(selecionados);
 
             popup.ShowDialog();
-
-            // opcional: atualizar lista depois da baixa
+           
             BtnPesquisar_Click(null, null);
+        }
+
+        private void BtnTransferencia_Click(object sender, RoutedEventArgs e)
+        {
+            if (DgMateriais.ItemsSource == null)
+            {
+                MessageBox.Show("Realize uma pesquisa antes de transferir materiais.");
+                return;
+            }
+
+            var lista = (List<GerenciaDTO>)DgMateriais.ItemsSource;
+
+            var selecionados = lista
+                                .Where(x => x.Selecionado)
+                                .ToList();
+
+            if (!selecionados.Any())
+            {
+                MessageBox.Show("Selecione pelo menos um material para transferir.");
+                return;
+            }
+
+            var popup = new PopupTransferenciaMaterial(selecionados);
+
+            popup.ShowDialog();
+
+            BtnPesquisar_Click(null, null);
+        }
+
+        private void BtnHistoricoMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            var botao = sender as Button;
+
+            var materialId = (Guid)botao.Tag;
+
+            var popup = new PopupHistoricoMaterial(materialId);
+
+            popup.ShowDialog();
         }
     }
 }

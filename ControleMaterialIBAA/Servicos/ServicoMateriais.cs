@@ -1,4 +1,5 @@
 ﻿using ControleMaterialIBAA.Config;
+using ControleMaterialIBAA.DTO;
 using ControleMaterialIBAA.Enums;
 using ControleMaterialIBAA.Modelos;
 using Newtonsoft.Json;
@@ -14,7 +15,7 @@ namespace ControleMaterialIBAA.Servicos
 {
     public class ServicoMateriais : ServicoBase
     {
-        public async Task<List<ModelosMateriais>> ListarAsync(bool ativos = true,string? numeroPatrimonial = null,Guid? departamentoId = null,Guid? subDepartamentoId = null,TipoMaterial? tipo = null)
+        public async Task<List<GerenciaDTO>> ListarAsync(bool ativos = true,string? numeroPatrimonial = null,Guid? departamentoId = null,Guid? subDepartamentoId = null,TipoMaterial? tipo = null)
         {
             var parametros = new List<string>();
 
@@ -51,10 +52,10 @@ namespace ControleMaterialIBAA.Servicos
             }
 
             var json = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<List<ModelosMateriais>>(json);
+            return JsonConvert.DeserializeObject<List<GerenciaDTO>>(json);
         }
 
-        public async Task<List<ModelosMateriais>> ConsultaResumidaAsync(string? material = null, Guid? departamentoId = null,TipoMaterial? tipo = null)
+        public async Task<List<ConsultaResumidaDTO>> ConsultaResumidaAsync(string? material = null, Guid? departamentoId = null,TipoMaterial? tipo = null)
         {
             var parametros = new List<string>();
 
@@ -85,7 +86,7 @@ namespace ControleMaterialIBAA.Servicos
                 throw new Exception(content);
             }
 
-            return JsonConvert.DeserializeObject<List<ModelosMateriais>>(content);
+            return JsonConvert.DeserializeObject<List<ConsultaResumidaDTO>>(content);
         }
 
         public async Task<ModelosMateriais?> ObterAsync(int id)
@@ -99,13 +100,24 @@ namespace ControleMaterialIBAA.Servicos
             return lista?.FirstOrDefault();
         }
 
-        public async Task AtualizarAsync(Guid id, ModelosMateriais material)
+        public async Task AtualizarAsync(Guid materialId,Guid departamentoId,Guid subDepartamentoId,string responsavel)
         {
-            var json = JsonConvert.SerializeObject(material);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            {
+                var obj = new
+                {
+                    departamentoId = departamentoId,
+                    subDepartamentoId = subDepartamentoId,
+                    responsavel = responsavel
+                };
 
-            var response = await _http.PatchAsync($"{Conexao.BaseUrl}/materiais?id=eq.{id}", content);
-            response.EnsureSuccessStatusCode();
+                var json = JsonConvert.SerializeObject(obj);
+
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await _http.PatchAsync($"{Conexao.BaseUrl}/materiais?id=eq.{materialId}", content);
+
+                response.EnsureSuccessStatusCode();
+            }
         }
 
         public async Task<bool> CriarAsync(List<ModelosMateriais> materiais)

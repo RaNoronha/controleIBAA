@@ -1,4 +1,5 @@
 ﻿using ControleMaterialIBAA.Config;
+using ControleMaterialIBAA.DTO;
 using ControleMaterialIBAA.Modelos;
 using Newtonsoft.Json;
 using System;
@@ -26,15 +27,18 @@ namespace ControleMaterialIBAA.Servicos
             return JsonConvert.DeserializeObject<List<ModelosMovimentacoes>>(json);
         }
 
-        public async Task<ModelosMovimentacoes?> ObterAsync(int id)
+        public async Task<List<HistoricoMaterialDTO>> BuscarHistoricoAsync(Guid materialId)
         {
-            var response = await _http.GetAsync($"{Conexao.BaseUrl}/movimentacoes?id=eq.{id}&limit=1");
-            response.EnsureSuccessStatusCode();
+            var url = $"{Conexao.BaseUrl}/vw_historico_material?materialId=eq.{materialId}&order=dtmovimentacao.desc";
+
+            var response = await _http.GetAsync(url);
 
             var json = await response.Content.ReadAsStringAsync();
-            var lista = JsonConvert.DeserializeObject<List<ModelosMovimentacoes>>(json);
 
-            return lista?.FirstOrDefault();
+            if (!response.IsSuccessStatusCode)
+                throw new Exception(json);
+
+            return JsonConvert.DeserializeObject<List<HistoricoMaterialDTO>>(json);
         }
 
         public async Task AtualizarAsync(Guid id, ModelosMovimentacoes material)

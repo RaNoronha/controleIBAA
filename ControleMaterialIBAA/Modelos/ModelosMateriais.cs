@@ -1,7 +1,9 @@
 ﻿using ControleMaterialIBAA.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 
 namespace ControleMaterialIBAA.Modelos
 {
@@ -19,14 +21,7 @@ namespace ControleMaterialIBAA.Modelos
         public DateTime? dtVerificacao { get; set; }
         public bool ativo { get; set; } = true;
         public Guid departamentoId { get; set; }
-        public Guid subDepartamentoId { get; set; }
-
-        public string departamento_nome { get; set; }
-        public string subdepartamento_nome { get; set; }
-
-        public string departamento { get; set; }
-        public int quantidade { get; set; }
-
-        public bool Selecionado { get; set; }
+        public Guid? subDepartamentoId { get; set; }
+        
     }
 }

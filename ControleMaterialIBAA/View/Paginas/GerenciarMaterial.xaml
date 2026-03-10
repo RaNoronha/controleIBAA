@@ -81,7 +81,7 @@
                            Grid.Column="3"
                            VerticalAlignment="Center"
                            FontWeight="Bold"
-                           Margin="99,0,81,0"
+                           Margin="90,0,90,0"
                            Grid.ColumnSpan="2"/>
 
                 <ComboBox x:Name="CmbSubDepartamentos"
@@ -128,6 +128,15 @@
             BorderThickness="0"
             Margin="10"
             Click="BtnBaixa_Click"/>
+                <Button x:Name="BtnTransferencia"
+            Content="Transferência"
+            Width="120"
+            Height="30"
+            FontWeight="Bold"
+            Background="MidnightBlue"
+            Foreground="White"
+            BorderThickness="0"
+            Click="BtnTransferencia_Click"/>
 
             </StackPanel>
 
@@ -173,6 +182,21 @@
                     <DataGridTextColumn Header="Tipo"
                                         Binding="{Binding tipoMaterial}"
                                         Width="*"/>
+                    <DataGridTemplateColumn Header="Histórico" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+
+                             <Button Content="Ver"
+                             Width="60"
+                             Height="25"
+                             Background="#3E6F6F"
+                             Foreground="White"
+                             Tag="{Binding id}"
+                             Click="BtnHistoricoMaterial_Click"/>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
                 </DataGrid.Columns>
             </DataGrid>

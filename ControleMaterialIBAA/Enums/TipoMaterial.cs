@@ -7,6 +7,6 @@ namespace ControleMaterialIBAA.Enums
     public enum TipoMaterial
     {
         Consumo = 1,
-        Duravel = 2
+        Durável = 2
     }
 }
