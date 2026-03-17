@@ -27,34 +27,16 @@ namespace ControleMaterialIBAA.View.Paginas
         public CadastrarMaterial()
         {
             InitializeComponent();
-            CarregarDepartamentos();
+            GerarCodigoMaterial();
             TxtQtd.TextChanged += CalcularTotal;
             TxtValor.TextChanged += CalcularTotal;
             CmbAquisicao.ItemsSource = Enum.GetValues(typeof(FormaAquisicao));
             CmbTipoMaterial.ItemsSource = Enum.GetValues(typeof(TipoMaterial));
         }
 
-        private async void CarregarDepartamentos()
+        private void GerarCodigoMaterial()
         {
-            var servico = new ServicoDepartamentos();
-            var lista = await servico.ListarAsync();
-
-            CmbDepartamentos.ItemsSource = lista;
-            CmbDepartamentos.DisplayMemberPath = "nome";
-            CmbDepartamentos.SelectedValuePath = "id";
-        }
-
-        private async void CmbDepartamentos_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (CmbDepartamentos.SelectedValue == null)
-                return;
-
-            Guid departamentoId = (Guid)CmbDepartamentos.SelectedValue;
-
-            var servicoSub = new ServicoSubDepartamentos();
-            var listaSub = await servicoSub.ListarPorDepartamentoAsync(departamentoId);
-
-            CmbSubDepartamentos.ItemsSource = listaSub;
+            TxtCodigo.Text = GerarCodigos.GerarCodigoMaterial();
         }
 
         private async void BtnSalvar_Click(object sender, RoutedEventArgs e)
@@ -63,89 +45,40 @@ namespace ControleMaterialIBAA.View.Paginas
             {
                 MessageBox.Show("O nome do material é obrigatório.");
                 return;
-            }
-
-            if (CmbDepartamentos.SelectedValue == null)
-            {
-                MessageBox.Show("Selecione um departamento.");
-                return;
-            }
-
-            if (CmbSubDepartamentos.SelectedValue == null)
-            {
-                MessageBox.Show("Selecione um subdepartamento.");
-                return;
-            }
-
-            if (!int.TryParse(TxtQtd.Text, out int quantidade))
-            {
-                MessageBox.Show("Quantidade inválida.");
-                return;
-            }
+            } 
 
             if (!decimal.TryParse(TxtValor.Text, out decimal valor))
             {
                 MessageBox.Show("Valor inválido.");
                 return;
-            }
-
-            Guid departamentoId = (Guid)CmbDepartamentos.SelectedValue;
-            Guid subDepartamentoId = (Guid)CmbSubDepartamentos.SelectedValue;
-
-            var listaMateriais = new List<ModelosMateriais>();
-
-            for (int i = 0; i < quantidade; i++)
+            } 
+            var material = new ModelosMateriais
             {
-                var item = new ModelosMateriais
-                {
-                    id = Guid.NewGuid(),
-                    material = TxtMaterial.Text.Trim(),
-                    descricao = TxtDescricao.Text.Trim(),
-                    marca = TxtMarcaModelo.Text.Trim(),
-                    tipoMaterial = (TipoMaterial)CmbTipoMaterial.SelectedItem,
-                    numPat = ((TipoMaterial)CmbTipoMaterial.SelectedItem == TipoMaterial.Durável)?NPAutomatico.Gerar() : null,
-                    valorUnitario = valor,                   
-                    aquisicao = (FormaAquisicao)CmbAquisicao.SelectedItem,                    
-                    responsavel = TxtResponsavel.Text.Trim(),
-                    dtVerificacao = DtVerificacao.SelectedDate,
-                    departamentoId = departamentoId,
-                    subDepartamentoId = subDepartamentoId,
-                    ativo = true
-                };
-
-                listaMateriais.Add(item);
-            }
+                id = Guid.NewGuid(),
+                cod = TxtCodigo.Text,
+                nome = TxtMaterial.Text.Trim(),
+                descricao = TxtDescricao.Text.Trim(),
+                marca = TxtMarcaModelo.Text.Trim(),
+                tipoMaterial = (TipoMaterial)CmbTipoMaterial.SelectedItem,
+                valorUnitario = valor,
+                aquisicao = (FormaAquisicao)CmbAquisicao.SelectedItem,
+                dtVerificacao = DtVerificacao.SelectedDate,
+                ativo = true
+            };
 
             var servico = new ServicoMateriais();
 
-            bool sucessoMaterial = await servico.CriarAsync(listaMateriais);           
+            bool sucessoMaterial = await servico.CriarAsync(material);           
 
             if (!sucessoMaterial)
             {
-                MessageBox.Show("Erro ao cadastrar material(is).");
+                MessageBox.Show("Erro ao cadastrar material.");
                 return;
             }
-            else
-            {                
-                foreach (var material in listaMateriais)
-                {
-                    var mov = new ModelosMovimentacoes
-                    {
-                        id = Guid.NewGuid(),
-                        materialId = material.id,
-                        tipo = TipoMovimentacao.Entrada,                        
-                        departamentoId = material.departamentoId,
-                        dtmovimentacao = DateTime.Now,
-                        usuario_id = Sessao.UsuarioLogado!.Id
-                    };
 
-                    var servicoMov = new ServicoMovimentacoes();
-                    await servicoMov.CriarAsync(mov);
-                }  
-               
-            }
+            MessageBox.Show($"Material cadastrado com sucesso!\n\nCódigo: {TxtCodigo.Text}\nMaterial: {TxtMaterial.Text}");
 
-            MessageBox.Show("Material(is) cadastrado(s) com sucesso!");
+            GerarCodigoMaterial();
 
             LimparCampos(this);
         }

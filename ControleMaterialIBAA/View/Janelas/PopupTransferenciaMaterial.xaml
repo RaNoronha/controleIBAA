@@ -27,10 +27,10 @@
                    FontSize="14"
                    Foreground="#2F4F4F"/>
 
-        <ListBox x:Name="LstMateriais"
+        <!--<ListBox x:Name="LstMateriais"
                  Grid.Row="1"
                  Margin="0,5,0,10"
-                 SelectionChanged="LstMateriais_SelectionChanged"/>
+                 SelectionChanged="LstMateriais_SelectionChanged"/>-->
 
         <!-- Departamento atual -->
         <StackPanel Grid.Row="2" Margin="0,5">

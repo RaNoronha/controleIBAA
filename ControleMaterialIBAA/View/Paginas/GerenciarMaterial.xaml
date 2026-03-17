@@ -38,7 +38,9 @@
                     Background="#6F9C9C">
 
             <!-- ================= FILTROS EM UMA LINHA ================= -->
-            <Grid Background="#6F9C9C" Margin="0,0,0,15">
+
+            <!-- ================= FILTROS EM UMA LINHA ================= -->
+            <Grid Background="#6F9C9C">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120"/>
@@ -51,57 +53,25 @@
                     <ColumnDefinition Width="180"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Nº Patrimonial -->
-                <TextBlock Text="Nº Patrimonial:"
+                <TextBlock Text="Código:"
                            VerticalAlignment="Center"
-                           FontWeight="Bold" Grid.ColumnSpan="2" Margin="20,0,79,0"/>
+                           FontWeight="Bold" Margin="117,0,134,0" Grid.Column="2" Grid.ColumnSpan="2"/>
 
-                <TextBox x:Name="TxtNumPat"
-                         Margin="111,5,19,5"
-                         Grid.ColumnSpan="2"/>
-
-                <!-- Departamento -->
-                <TextBlock Text="Depto:"
-                           Grid.Column="2"
-                           VerticalAlignment="Center"
-                           FontWeight="Bold"
-                           Margin="5,0,145,0">
-                </TextBlock>
-
-                <ComboBox x:Name="CmbDepartamentos"
-                          Grid.Column="2"
-                          Margin="46,5,130,5"
-                          DisplayMemberPath="nome"
-                          SelectedValuePath="id"
-                          SelectionChanged="CmbDepartamentos_SelectionChanged"
-                          Grid.ColumnSpan="2"/>
-
-                <!-- SubDepartamento -->
-                <TextBlock Text="SubDepto:"
-                           Grid.Column="3"
-                           VerticalAlignment="Center"
-                           FontWeight="Bold"
-                           Margin="90,0,90,0"
-                           Grid.ColumnSpan="2"/>
-
-                <ComboBox x:Name="CmbSubDepartamentos"
-                          Grid.Column="3"
-                          Margin="160,5,160,5"
-                          DisplayMemberPath="nome"
-                          SelectedValuePath="id"
-                          Grid.ColumnSpan="3"/>
+                <TextBox x:Name="TxtCod"
+                         Margin="177,5,105,5" Grid.Column="2" Grid.ColumnSpan="2"/>
 
                 <!-- Tipo Material -->
                 <TextBlock Text="Tipo Material:"
-                           Grid.Column="5"
-                           VerticalAlignment="Center"
+                           Grid.Column="3"
                            FontWeight="Bold"
-                           Margin="40,0,30,0"/>
+                           Margin="102,8,98,8" Grid.ColumnSpan="2"/>
 
                 <ComboBox x:Name="CmbTipoMaterial"
-                          Grid.Column="5"
-                          Margin="129,5,171,5"
-                          Grid.ColumnSpan="3"/>
+                          Grid.Column="4"
+                          Margin="15,5,125,5"
+                          Grid.ColumnSpan="2"
+                          SelectedValuePath="Key"
+                          DisplayMemberPath="Value"/>
 
             </Grid>
 
@@ -119,7 +89,7 @@
             Margin="1" 
             Click="BtnPesquisar_Click"/>
 
-            <Button Content="Baixa"
+                <Button Content="Excluir"
             Width="100"
             Height="30"
             FontWeight="Bold"
@@ -127,16 +97,7 @@
             Foreground="White"
             BorderThickness="0"
             Margin="10"
-            Click="BtnBaixa_Click"/>
-                <Button x:Name="BtnTransferencia"
-            Content="Transferência"
-            Width="120"
-            Height="30"
-            FontWeight="Bold"
-            Background="MidnightBlue"
-            Foreground="White"
-            BorderThickness="0"
-            Click="BtnTransferencia_Click"/>
+            Click="BtnExcluir_Click"/>
 
             </StackPanel>
 
@@ -160,33 +121,27 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTextColumn Header="Nº Patrimonial"
-                                        Binding="{Binding numPat}"
+                    <DataGridTextColumn Header="Código"
+                                        Binding="{Binding cod}"
                                         Width="150"/>
 
                     <DataGridTextColumn Header="Material"
-                                        Binding="{Binding material}"
+                                        Binding="{Binding nome}"
                                         Width="150"/>
 
-                    <DataGridTextColumn Header="Departamento"
-                                        Binding="{Binding departamento_nome}"
+                    <DataGridTextColumn Header="Descrição"
+                                        Binding="{Binding descricao}"
                                         Width="180"/>
 
-                    <DataGridTextColumn Header="SubDepto"
-                                        Binding="{Binding subdepartamento_nome}"
+                    <DataGridTextColumn Header="Marca"
+                                        Binding="{Binding marca}"
                                         Width="180"/>
 
-                    <DataGridTextColumn Header="Responsável"
-                                        Binding="{Binding responsavel}"
-                                        Width="150"/>
-                    <DataGridTextColumn Header="Tipo"
-                                        Binding="{Binding tipoMaterial}"
-                                        Width="*"/>
                     <DataGridTemplateColumn Header="Histórico" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
 
-                             <Button Content="Ver"
+                                <Button Content="Ver"
                              Width="60"
                              Height="25"
                              Background="#3E6F6F"

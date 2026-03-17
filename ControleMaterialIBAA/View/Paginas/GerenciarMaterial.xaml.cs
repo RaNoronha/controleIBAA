@@ -27,7 +27,6 @@ namespace ControleMaterialIBAA.View.Paginas
         public GerenciarMaterial()
         {
             InitializeComponent();
-            CarregarDepartamentos();
             CarregarTipoMaterial();
 
         }
@@ -43,9 +42,6 @@ namespace ControleMaterialIBAA.View.Paginas
                 id = Guid.Empty,
                 nome = ""
             });
-
-            CmbDepartamentos.ItemsSource = lista;
-            CmbDepartamentos.SelectedIndex = 0;
         }
 
         private void CarregarTipoMaterial()
@@ -67,50 +63,25 @@ namespace ControleMaterialIBAA.View.Paginas
 
             CmbTipoMaterial.SelectedIndex = 0; // começa vazio
         }
-        private async void CmbDepartamentos_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (CmbDepartamentos.SelectedValue == null)
-                return;
-
-            Guid departamentoId = (Guid)CmbDepartamentos.SelectedValue;
-
-            var servicoSub = new ServicoSubDepartamentos();
-            var listaSub = await servicoSub.ListarPorDepartamentoAsync(departamentoId);
-
-            CmbSubDepartamentos.ItemsSource = listaSub;
-        }
+      
 
         private async void BtnPesquisar_Click(object sender, RoutedEventArgs e)
         {
-
-            var numeroPat = TxtNumPat.Text?.Trim();
-
-            Guid? departamentoId = null;
-            Guid? subDepartamentoId = null;
-
-            if (CmbDepartamentos.SelectedValue is Guid dep && dep != Guid.Empty)
-                departamentoId = dep;
-
-            if (CmbSubDepartamentos.SelectedValue is Guid sub && sub != Guid.Empty)
-                subDepartamentoId = sub;
+            var codigo = TxtCod.Text?.Trim();
 
             TipoMaterial? tipo = null;
 
             if (CmbTipoMaterial.SelectedValue != null)
-                tipo = (TipoMaterial)CmbTipoMaterial.SelectedValue;
+            {
+                tipo = (TipoMaterial)(int)CmbTipoMaterial.SelectedValue;
+            }                
 
-            var lista = await _servicoMateriais.ListarAsync(
-                ativos: true,
-                numeroPatrimonial: numeroPat,
-                departamentoId: departamentoId,
-                subDepartamentoId: subDepartamentoId,
-                tipo: tipo
-            );
+            var lista = await _servicoMateriais.ListarAsync(ativos: true,cod: codigo,tipo: tipo);
 
             DgMateriais.ItemsSource = lista;
         }
 
-        private void BtnBaixa_Click(object sender, RoutedEventArgs e)
+        private void BtnExcluir_Click(object sender, RoutedEventArgs e)
         {
             if (DgMateriais.ItemsSource == null)
             {
@@ -123,9 +94,9 @@ namespace ControleMaterialIBAA.View.Paginas
                 return;
             }
 
-            var selecionados = ((List<GerenciaDTO>)DgMateriais.ItemsSource)
-                                .Where(x => x.Selecionado)
-                                .ToList();
+            var lista = DgMateriais.ItemsSource as List<ModelosMateriais>;
+
+            var selecionados = lista.Where(x => x.selecionado).ToList();
 
             if (!selecionados.Any())
             {
@@ -133,39 +104,50 @@ namespace ControleMaterialIBAA.View.Paginas
                 return;
             }
 
-            var popup = new PopupBaixaMaterial(selecionados);
-
-            popup.ShowDialog();
-           
-            BtnPesquisar_Click(null, null);
-        }
-
-        private void BtnTransferencia_Click(object sender, RoutedEventArgs e)
-        {
-            if (DgMateriais.ItemsSource == null)
-            {
-                MessageBox.Show("Realize uma pesquisa antes de transferir materiais.");
-                return;
-            }
-
-            var lista = (List<GerenciaDTO>)DgMateriais.ItemsSource;
-
-            var selecionados = lista
-                                .Where(x => x.Selecionado)
-                                .ToList();
-
-            if (!selecionados.Any())
-            {
-                MessageBox.Show("Selecione pelo menos um material para transferir.");
-                return;
-            }
-
-            var popup = new PopupTransferenciaMaterial(selecionados);
+            var popup = new PopupConfirmacaoExclusao($"Deseja realmente dar baixa em {selecionados.Count} material(is)?");
 
             popup.ShowDialog();
 
+            if (!popup.Confirmado)
+                return;
+
+
+            foreach (var item in selecionados)
+            {
+                item.ativo = false;
+            }
+
+            MessageBox.Show("Material(is) excluído(s) com sucesso!");
+
             BtnPesquisar_Click(null, null);
         }
+
+        //private void BtnTransferencia_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (DgMateriais.ItemsSource == null)
+        //    {
+        //        MessageBox.Show("Realize uma pesquisa antes de transferir materiais.");
+        //        return;
+        //    }
+
+        //    var lista = (List<GerenciaDTO>)DgMateriais.ItemsSource;
+
+        //    var selecionados = lista
+        //                        .Where(x => x.Selecionado)
+        //                        .ToList();
+
+        //    if (!selecionados.Any())
+        //    {
+        //        MessageBox.Show("Selecione pelo menos um material para transferir.");
+        //        return;
+        //    }
+
+        //    var popup = new PopupTransferenciaMaterial(selecionados);
+
+        //    popup.ShowDialog();
+
+        //    BtnPesquisar_Click(null, null);
+        //}
 
         private void BtnHistoricoMaterial_Click(object sender, RoutedEventArgs e)
         {

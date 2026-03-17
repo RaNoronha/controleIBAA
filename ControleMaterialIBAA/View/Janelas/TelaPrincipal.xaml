@@ -47,12 +47,6 @@
                                       FontFamily="Verdana"
                                       FontSize="14"
                                       Selected="GerenciarMaterial"/>
-                        <TreeViewItem Header="Consulta Resumida"
-                                      Margin="25,0,0,0"
-                                      FontFamily="Verdana"
-                                      FontSize="14"
-                                      Selected="ConsultaResumida"/>    
-
                     </TreeViewItem>
 
                     <!-- DEPARTAMENTOS -->

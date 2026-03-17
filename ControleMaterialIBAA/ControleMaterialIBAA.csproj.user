@@ -5,7 +5,7 @@
     <Compile Update="View\Janelas\CadastroUsuario.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Janelas\PopupBaixaMaterial.xaml.cs">
+    <Compile Update="View\Janelas\PopupConfirmacaoExclusao.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Janelas\PopupHistoricoMaterial.xaml.cs">

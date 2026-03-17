@@ -15,7 +15,7 @@ namespace ControleMaterialIBAA.Servicos
 {
     public class ServicoMateriais : ServicoBase
     {
-        public async Task<List<GerenciaDTO>> ListarAsync(bool ativos = true,string? numeroPatrimonial = null,Guid? departamentoId = null,Guid? subDepartamentoId = null,TipoMaterial? tipo = null)
+        public async Task<List<ModelosMateriais>> ListarAsync(bool ativos = true,string? cod = null ,TipoMaterial? tipo = null)
         {
             var parametros = new List<string>();
 
@@ -25,14 +25,8 @@ namespace ControleMaterialIBAA.Servicos
             if (ativos)
                 parametros.Add("ativo=eq.true");
 
-            if (!string.IsNullOrWhiteSpace(numeroPatrimonial))
-                parametros.Add($"numPat=eq.{numeroPatrimonial}");
-
-            if (departamentoId.HasValue)
-                parametros.Add($"departamentoId=eq.{departamentoId}");
-
-            if (subDepartamentoId.HasValue)
-                parametros.Add($"subDepartamentoId=eq.{subDepartamentoId}");
+            if (!string.IsNullOrWhiteSpace(cod))
+                parametros.Add($"cod=eq.{cod}");
 
             if (tipo.HasValue)
                 parametros.Add($"tipoMaterial=eq.{(int)tipo.Value}");
@@ -52,7 +46,7 @@ namespace ControleMaterialIBAA.Servicos
             }
 
             var json = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<List<GerenciaDTO>>(json);
+            return JsonConvert.DeserializeObject<List<ModelosMateriais>>(json);
         }
 
         public async Task<List<ConsultaResumidaDTO>> ConsultaResumidaAsync(string? material = null, Guid? departamentoId = null,TipoMaterial? tipo = null)
@@ -120,7 +114,7 @@ namespace ControleMaterialIBAA.Servicos
             }
         }
 
-        public async Task<bool> CriarAsync(List<ModelosMateriais> materiais)
+        public async Task<bool> CriarAsync(ModelosMateriais materiais)
         {
             try
             {
