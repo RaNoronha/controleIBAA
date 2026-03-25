@@ -47,15 +47,19 @@
                                       FontFamily="Verdana"
                                       FontSize="14"
                                       Selected="GerenciarMaterial"/>
+                        <TreeViewItem Header="Transferir Material"
+                                      Margin="25,0,0,0"
+                                      FontFamily="Verdana"
+                                      FontSize="14"
+                                      Selected="TransferirMaterial"/>
                     </TreeViewItem>
-
                     <!-- DEPARTAMENTOS -->
                     <TreeViewItem Header="🏢 DEPARTAMENTOS"
                                   FontSize="18"
                                   FontFamily="Bahnschrift"                                         
                                   FontWeight="Bold">
-                        
-                        <TreeViewItem Header="Cadastrar"
+
+                            <TreeViewItem Header="Cadastrar"
                                       Margin="25,0,0,0"
                                       FontFamily="Verdana"
                                       FontSize="14"

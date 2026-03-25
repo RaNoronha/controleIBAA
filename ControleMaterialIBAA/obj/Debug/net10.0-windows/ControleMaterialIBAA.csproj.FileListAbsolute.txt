@@ -138,3 +138,5 @@ C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debu
 C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\Janelas\PopupHistoricoMaterial.g.cs
 C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\Janelas\PopupConfirmacaoExclusao.baml
 C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\Janelas\PopupConfirmacaoExclusao.g.cs
+C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\Paginas\GerenciarPatrimonio.baml
+C:\Users\Noronha\source\repos\ControleMaterialIBAA\ControleMaterialIBAA\obj\Debug\net10.0-windows\View\Paginas\GerenciarPatrimonio.g.cs

@@ -10,7 +10,9 @@ namespace ControleMaterialIBAA.Modelos
     {
         public Guid id { get; set; }
         public Guid materialId { get; set; }        
-        public Guid departamentoId { get; set; }        
+        public Guid departamentoId { get; set; }
+        public Guid subDepartamentoId { get; set; }
+        public int quantidade { get; set; }
         public TipoMovimentacao tipo { get; set; }             
         public Guid usuario_id { get; set; }
         public DateTime dtmovimentacao { get; set; }

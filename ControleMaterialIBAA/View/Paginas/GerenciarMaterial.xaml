@@ -89,7 +89,7 @@
             Margin="1" 
             Click="BtnPesquisar_Click"/>
 
-                <Button Content="Excluir"
+            <Button Content="Excluir"
             Width="100"
             Height="30"
             FontWeight="Bold"
@@ -114,7 +114,7 @@
                     <DataGridTemplateColumn Header="Selecionar" Width="90">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding Selecionado, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                <CheckBox IsChecked="{Binding selecionado, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"/>
                             </DataTemplate>

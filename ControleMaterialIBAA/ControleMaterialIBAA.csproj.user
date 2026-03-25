@@ -32,5 +32,8 @@
     <Compile Update="View\Janelas\TelaPrincipal.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Paginas\GerenciarPatrimonio.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

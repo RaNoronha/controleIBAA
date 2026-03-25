@@ -133,12 +133,10 @@ namespace ControleMaterialIBAA.View.Janelas
 
                     await _servicoMov.RegistrarMovimentacaoAsync(movimentacao);
                     
-                    await _servicoMateriais.AtualizarAsync(
-                        material.id,
-                        novoDepartamento,
-                        novoSubDepartamento,
-                        novoResponsavel
-                    );
+                    //await _servicoMateriais.AtualizarAsync(
+                    //    material.id,
+                    //    ativo
+                    //);
                 }
 
                 MessageBox.Show("Transferência realizada com sucesso.");

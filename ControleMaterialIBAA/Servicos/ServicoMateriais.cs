@@ -18,18 +18,14 @@ namespace ControleMaterialIBAA.Servicos
         public async Task<List<ModelosMateriais>> ListarAsync(bool ativos = true,string? cod = null ,TipoMaterial? tipo = null)
         {
             var parametros = new List<string>();
-
-            // Agora select é simples porque é VIEW
+           
             parametros.Add("select=*");
 
-            if (ativos)
-                parametros.Add("ativo=eq.true");
+            if (ativos) {parametros.Add("ativo=eq.true");}                            
 
-            if (!string.IsNullOrWhiteSpace(cod))
-                parametros.Add($"cod=eq.{cod}");
+            if (!string.IsNullOrWhiteSpace(cod)) {parametros.Add($"cod=ilike.*{cod}*");}
 
-            if (tipo.HasValue)
-                parametros.Add($"tipoMaterial=eq.{(int)tipo.Value}");
+            if (tipo.HasValue) {parametros.Add($"tipoMaterial=eq.{(int)tipo.Value}");}
 
             var queryString = "?" + string.Join("&", parametros);
             
@@ -46,6 +42,7 @@ namespace ControleMaterialIBAA.Servicos
             }
 
             var json = await response.Content.ReadAsStringAsync();
+
             return JsonConvert.DeserializeObject<List<ModelosMateriais>>(json);
         }
 
@@ -94,24 +91,20 @@ namespace ControleMaterialIBAA.Servicos
             return lista?.FirstOrDefault();
         }
 
-        public async Task AtualizarAsync(Guid materialId,Guid departamentoId,Guid subDepartamentoId,string responsavel)
+        public async Task AtualizarAsync(Guid materialId, bool ativo)
         {
+            var obj = new
             {
-                var obj = new
-                {
-                    departamentoId = departamentoId,
-                    subDepartamentoId = subDepartamentoId,
-                    responsavel = responsavel
-                };
+                ativo = ativo
+            };
 
-                var json = JsonConvert.SerializeObject(obj);
+            var json = JsonConvert.SerializeObject(obj);
 
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = await _http.PatchAsync($"{Conexao.BaseUrl}/materiais?id=eq.{materialId}", content);
+            var response = await _http.PatchAsync( $"{Conexao.BaseUrl}/materiais?id=eq.{materialId}", content);
 
-                response.EnsureSuccessStatusCode();
-            }
+            response.EnsureSuccessStatusCode();
         }
 
         public async Task<bool> CriarAsync(ModelosMateriais materiais)

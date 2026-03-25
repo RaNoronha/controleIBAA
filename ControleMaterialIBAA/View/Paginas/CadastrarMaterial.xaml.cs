@@ -27,9 +27,8 @@ namespace ControleMaterialIBAA.View.Paginas
         public CadastrarMaterial()
         {
             InitializeComponent();
-            GerarCodigoMaterial();
-            TxtQtd.TextChanged += CalcularTotal;
-            TxtValor.TextChanged += CalcularTotal;
+            GerarCodigoMaterial();            
+            //TxtValor.TextChanged += CalcularTotal;
             CmbAquisicao.ItemsSource = Enum.GetValues(typeof(FormaAquisicao));
             CmbTipoMaterial.ItemsSource = Enum.GetValues(typeof(TipoMaterial));
         }
@@ -83,21 +82,21 @@ namespace ControleMaterialIBAA.View.Paginas
             LimparCampos(this);
         }
 
-        private void CalcularTotal(object sender, TextChangedEventArgs e)
-        {
-            var cultura = new CultureInfo("pt-BR");
+        //private void CalcularTotal(object sender, TextChangedEventArgs e)
+        //{
+        //    var cultura = new CultureInfo("pt-BR");
 
-            if (decimal.TryParse(TxtQtd.Text, NumberStyles.Any, cultura, out decimal quantidade) &&
-                decimal.TryParse(TxtValor.Text, NumberStyles.Any, cultura, out decimal valorUnitario))
-            {
-                decimal total = quantidade * valorUnitario;
-                TxtValorTotal.Text = total.ToString("N2", cultura);
-            }
-            else
-            {
-                TxtValorTotal.Text = "0,00";
-            }
-        }
+        //    if (decimal.TryParse(TxtQtd.Text, NumberStyles.Any, cultura, out decimal quantidade) &&
+        //        decimal.TryParse(TxtValor.Text, NumberStyles.Any, cultura, out decimal valorUnitario))
+        //    {
+        //        decimal total = quantidade * valorUnitario;
+        //        TxtValorTotal.Text = total.ToString("N2", cultura);
+        //    }
+        //    else
+        //    {
+        //        TxtValorTotal.Text = "0,00";
+        //    }
+        //}
 
         private void LimparCampos(DependencyObject parent)
         {

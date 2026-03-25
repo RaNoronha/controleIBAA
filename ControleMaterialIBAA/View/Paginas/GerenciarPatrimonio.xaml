@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="ControleMaterialIBAA.View.Paginas.GerenciarPatrimonio"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
+
+    <Grid Background="#6F9C9C">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ================= CABEÇALHO ================= -->
+        <StackPanel Grid.Row="0"
+                    Margin="0,30,0,20"
+                    HorizontalAlignment="Center">
+
+            <TextBlock Text="TRANSFERÊNCIA DE MATERIAL"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="Black"
+                       HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Igreja Batista Altitude de Anchieta"
+                       FontSize="14"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- ================= CONTEÚDO ================= -->
+        <StackPanel Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    Width="1100">
+
+            <!-- FILTROS -->
+            <Grid Margin="0,0,0,10">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Código:"
+                           VerticalAlignment="Center"
+                           FontWeight="Bold"
+                           Grid.Column="1" Grid.ColumnSpan="2" Margin="105,0,95,0"/>
+
+                <TextBox x:Name="TxtCod"
+                         Grid.Column="1"
+                         Margin="160,5,0,5" Grid.ColumnSpan="2"/>
+
+                <TextBlock Text="Tipo Material:"
+                           Grid.Column="3"
+                           VerticalAlignment="Center"
+                           FontWeight="Bold" Margin="25,0,25,0"/>
+
+                <ComboBox x:Name="CmbTipoMaterial"
+                          Grid.Column="3"
+                          Margin="118,5,-108,5"
+                          SelectedValuePath="Key"
+                          DisplayMemberPath="Value" RenderTransformOrigin="0.242,0.689"/>
+            </Grid>
+
+            <!-- BOTÃO -->
+            <StackPanel Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            Margin="0,10">
+
+                <Button Content="Pesquisar"
+            Width="140"
+            Height="35"
+            Background="#3E6F6F"
+            Foreground="White"
+            FontWeight="Bold"
+            Margin="5"
+            Click="BtnPesquisar_Click"/>
+
+                <Button Content="Transferir Material"
+            Width="180"
+            Height="35"
+            Background="#2E8B57"
+            Foreground="White"
+            FontWeight="Bold"
+            Margin="5"
+            Click="BtnTranferirMaterial_Click"/>
+            </StackPanel>
+
+            <!-- GRID -->
+            <DataGrid x:Name="DgMateriais"
+          AutoGenerateColumns="False"
+          Height="500"
+          CanUserAddRows="False"
+          Margin="0,10">
+
+                <DataGrid.Columns>
+
+                    <!-- CHECKBOX -->
+                    <DataGridTemplateColumn Header="Selecionar" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding selecionado, Mode=TwoWay}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Header="Código"
+                            Binding="{Binding cod}"
+                            Width="150"/>
+
+                    <DataGridTextColumn Header="Material"
+                            Binding="{Binding nome}"
+                            Width="300"/>
+
+                    <DataGridTextColumn Header="Descrição"
+                            Binding="{Binding descricao}"
+                            Width="300"/>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

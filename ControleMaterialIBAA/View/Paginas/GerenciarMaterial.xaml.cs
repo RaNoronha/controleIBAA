@@ -47,11 +47,9 @@ namespace ControleMaterialIBAA.View.Paginas
         private void CarregarTipoMaterial()
         {
             var lista = new List<KeyValuePair<int?, string>>();
-
-            // 🔹 Opção vazia
+            
             lista.Add(new KeyValuePair<int?, string>(null, ""));
-
-            // 🔹 Enum
+            
             foreach (TipoMaterial tipo in Enum.GetValues(typeof(TipoMaterial)))
             {
                 lista.Add(new KeyValuePair<int?, string>((int)tipo, tipo.ToString()));
@@ -61,7 +59,7 @@ namespace ControleMaterialIBAA.View.Paginas
             CmbTipoMaterial.DisplayMemberPath = "Value";
             CmbTipoMaterial.SelectedValuePath = "Key";
 
-            CmbTipoMaterial.SelectedIndex = 0; // começa vazio
+            CmbTipoMaterial.SelectedIndex = 0; 
         }
       
 
@@ -81,7 +79,7 @@ namespace ControleMaterialIBAA.View.Paginas
             DgMateriais.ItemsSource = lista;
         }
 
-        private void BtnExcluir_Click(object sender, RoutedEventArgs e)
+        private async void BtnExcluir_Click(object sender, RoutedEventArgs e)
         {
             if (DgMateriais.ItemsSource == null)
             {
@@ -94,30 +92,35 @@ namespace ControleMaterialIBAA.View.Paginas
                 return;
             }
 
-            var lista = DgMateriais.ItemsSource as List<ModelosMateriais>;
+            var lista = DgMateriais.Items.Cast<ModelosMateriais>().ToList();
 
             var selecionados = lista.Where(x => x.selecionado).ToList();
 
             if (!selecionados.Any())
             {
+                MessageBox.Show(lista.Count(x => x.selecionado).ToString());
                 MessageBox.Show("Selecione pelo menos um material para dar baixa.");
                 return;
             }
 
-            var popup = new PopupConfirmacaoExclusao($"Deseja realmente dar baixa em {selecionados.Count} material(is)?");
+            var nomes = string.Join(", ", selecionados.Select(x => $"{x.nome} ({x.cod})"));
+
+            var popup = new PopupConfirmacaoExclusao(selecionados.Count == 1 ? $"Deseja realmente dar baixa no material:\n{nomes}?"
+                    : $"Deseja realmente dar baixa em {selecionados.Count} materiais?\n{nomes}");
 
             popup.ShowDialog();
 
             if (!popup.Confirmado)
+            {
                 return;
-
+            }
 
             foreach (var item in selecionados)
             {
-                item.ativo = false;
+                await _servicoMateriais.AtualizarAsync(item.id, false);
             }
 
-            MessageBox.Show("Material(is) excluído(s) com sucesso!");
+            MessageBox.Show("Material excluído com sucesso!");
 
             BtnPesquisar_Click(null, null);
         }

@@ -39,10 +39,10 @@ namespace ControleMaterialIBAA.View.Janelas
             MainContent.Content = new ConsultaSimplificadaMaterial();
         }
 
-        //private void ExcluirMaterial(object sender, RoutedEventArgs e)
-        //{
-        //    MainContent.Content = new ExcluirMaterial();
-        //}
+        private void TransferirMaterial(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new GerenciarPatrimonio();
+        }
 
         private void CadastrarDepartamento(object sender, RoutedEventArgs e)
         {

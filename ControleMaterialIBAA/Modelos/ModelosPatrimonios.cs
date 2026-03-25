@@ -13,7 +13,6 @@ namespace ControleMaterialIBAA.Modelos
 
         public Guid materialId { get; set; }
         public string? responsavel { get; set; }
-
         public DateTime? dtTransferencia { get; set; }
 
         public Guid departamentoId { get; set; }
