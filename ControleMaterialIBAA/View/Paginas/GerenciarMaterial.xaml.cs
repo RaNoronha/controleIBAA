@@ -97,8 +97,7 @@ namespace ControleMaterialIBAA.View.Paginas
             var selecionados = lista.Where(x => x.selecionado).ToList();
 
             if (!selecionados.Any())
-            {
-                MessageBox.Show(lista.Count(x => x.selecionado).ToString());
+            {                
                 MessageBox.Show("Selecione pelo menos um material para dar baixa.");
                 return;
             }

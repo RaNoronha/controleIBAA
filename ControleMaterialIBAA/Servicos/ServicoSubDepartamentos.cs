@@ -38,7 +38,7 @@ namespace ControleMaterialIBAA.Servicos
             return JsonConvert.DeserializeObject<List<ModelosSubDepartamentos>>(json);
         }
 
-        public async Task<ModelosSubDepartamentos?> ObterAsync(int id)
+        public async Task<ModelosSubDepartamentos?> ObterAsync(Guid id)
         {
             var response = await _http.GetAsync($"{Conexao.BaseUrl}/sub_departamentos?id=eq.{id}&limit=1");
             response.EnsureSuccessStatusCode();

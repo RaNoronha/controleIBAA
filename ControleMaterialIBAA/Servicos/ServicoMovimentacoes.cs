@@ -54,7 +54,10 @@ namespace ControleMaterialIBAA.Servicos
         {
             try
             {
-                var json = JsonConvert.SerializeObject(movimentacao);
+                var json = JsonConvert.SerializeObject(movimentacao, new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore
+                });
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 var response = await _http.PostAsync($"{Conexao.BaseUrl}/movimentacoes", content);
@@ -67,6 +70,23 @@ namespace ControleMaterialIBAA.Servicos
             }
         }
 
+        public async Task<ModelosMovimentacoes?> ObterUltimaPorMaterial(Guid materialId)
+        {            
+                var url = $"{Conexao.BaseUrl}/movimentacoes" + $"?materialId=eq.{materialId}" + $"&order=dtMovimentacao.desc" +
+                          $"&limit=1";
+
+                var response = await _http.GetAsync(url);
+
+                if (!response.IsSuccessStatusCode) {return null;}
+                    
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                var lista = JsonConvert.DeserializeObject<List<ModelosMovimentacoes>>(json);
+
+                return lista?.FirstOrDefault();
+            
+        }
         public async Task RegistrarMovimentacaoAsync(ModelosMovimentacoes mov)
         {
             var json = JsonConvert.SerializeObject(mov);

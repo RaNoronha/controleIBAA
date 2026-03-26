@@ -26,5 +26,16 @@ namespace ControleMaterialIBAA.Servicos
                 return false;
             }
         }
+
+        public async Task<List<ModelosPatrimonios>> ListarAsync()
+        {
+            var url = $"{Conexao.BaseUrl}/patrimonios";
+
+            var response = await _http.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<ModelosPatrimonios>>(json);
+        }
     }
 }

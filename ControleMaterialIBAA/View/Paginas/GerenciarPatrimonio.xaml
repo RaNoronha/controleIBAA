@@ -101,7 +101,9 @@
                     <DataGridTemplateColumn Header="Selecionar" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding selecionado, Mode=TwoWay}"/>
+                                <CheckBox IsChecked="{Binding selecionado, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

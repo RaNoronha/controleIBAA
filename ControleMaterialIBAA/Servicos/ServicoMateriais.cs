@@ -15,6 +15,10 @@ namespace ControleMaterialIBAA.Servicos
 {
     public class ServicoMateriais : ServicoBase
     {
+        private List<ModelosPatrimonios> _patrimonios;
+        ServicoDepartamentos _servicoDep = new ServicoDepartamentos();
+        ServicoSubDepartamentos _servicoSub = new ServicoSubDepartamentos();
+        ServicoMovimentacoes _servicoMovimentacoes = new ServicoMovimentacoes();
         public async Task<List<ModelosMateriais>> ListarAsync(bool ativos = true,string? cod = null ,TipoMaterial? tipo = null)
         {
             var parametros = new List<string>();
@@ -137,6 +141,75 @@ namespace ControleMaterialIBAA.Servicos
         {
             var response = await _http.DeleteAsync($"{Conexao.BaseUrl}/materiais?id=eq.{id}");
             response.EnsureSuccessStatusCode();
+        }
+        public async Task<OrigemMaterialDto> ObterOrigemMaterial(ModelosMateriais mat)
+        {
+            // 🔹 MATERIAL PERMANENTE → usa patrimônio
+            if (mat.tipoMaterial == TipoMaterial.Permanente)
+            {
+                var patrimonio = _patrimonios?
+                    .FirstOrDefault(p => p.materialId == mat.id && p.ativo);
+
+                if (patrimonio != null)
+                {
+                    var deptObj = await _servicoDep.ObterAsync(patrimonio.departamentoId);
+
+                    string subDepNome = "-";
+                    if (patrimonio.subDepartamentoId.HasValue)
+                    {
+                        var subdepObj = await _servicoSub.ObterAsync(patrimonio.subDepartamentoId.Value);
+                        subDepNome = subdepObj?.nome ?? "-";
+                    }
+
+                    return new OrigemMaterialDto
+                    {
+                        departamento = deptObj?.nome ?? "Desconhecido",
+                        subDepartamento = subDepNome,
+                        responsavel = patrimonio.responsavel ?? "-"
+                    };
+                }
+
+                // sem patrimônio ainda
+                return new OrigemMaterialDto
+                {
+                    departamento = "Sem patrimônio",
+                    subDepartamento = "-",
+                    responsavel = "-"
+                };
+            }
+
+            // 🔹 MATERIAL DE CONSUMO → usa movimentação
+            else
+            {
+                var mov = await _servicoMovimentacoes.ObterUltimaPorMaterial(mat.id);
+
+                if (mov != null)
+                {
+                    var deptObj = await _servicoDep.ObterAsync(mov.departamentoId);
+
+                    string subDepNome = "-";
+                    if (mov.subDepartamentoId.HasValue)
+                    {
+                        var subdepObj = await _servicoSub.ObterAsync(mov.subDepartamentoId.Value);
+                        subDepNome = subdepObj?.nome ?? "-";
+                    }
+
+                    return new OrigemMaterialDto
+                    {
+                        departamento = deptObj?.nome ?? "Desconhecido",
+                        subDepartamento = subDepNome,
+                        responsavel = "-" // consumo não tem responsável fixo
+                    };
+                }
+
+                // sem movimentação ainda
+                return new OrigemMaterialDto
+                {
+                    departamento = "Sem movimentação",
+                    subDepartamento = "-",
+                    responsavel = "-"
+                };
+            }
         }
     }
 }

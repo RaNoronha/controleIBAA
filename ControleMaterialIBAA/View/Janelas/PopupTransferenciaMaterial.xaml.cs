@@ -1,89 +1,44 @@
-﻿using ControleMaterialIBAA.DTO;
-using ControleMaterialIBAA.Enums;
-using ControleMaterialIBAA.Infra;
+﻿using ControleMaterialIBAA.Servicos;
 using ControleMaterialIBAA.Modelos;
-using ControleMaterialIBAA.Servicos;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
-using System.Windows.Shapes;
 
 namespace ControleMaterialIBAA.View.Janelas
 {
-    /// <summary>
-    /// Lógica interna para PopupTransferenciaMaterial.xaml
-    /// </summary>
     public partial class PopupTransferenciaMaterial : Window
     {
         ServicoDepartamentos _servicoDep = new ServicoDepartamentos();
         ServicoSubDepartamentos _servicoSub = new ServicoSubDepartamentos();
+        ServicoPatrimonios _servicoPatrimonios = new ServicoPatrimonios();
         ServicoMateriais _servicoMateriais = new ServicoMateriais();
-        ServicoMovimentacoes _servicoMov = new ServicoMovimentacoes();
         private List<ModelosMateriais> _materiais;
+        private List<ModelosPatrimonios> _patrimonios;
 
-        public PopupTransferenciaMaterial(List<ModelosMateriais> materiais)
+        public bool confirmado { get; set; } = false;
+        public Guid departamentoDestinoId { get; set; }
+        public Guid? subDepartamentoDestinoId { get; set; }
+        public string responsavelDestino { get; set; }
+        public string observacao { get; set; }
+        public int quant { get; set; }
+
+        public PopupTransferenciaMaterial(List<ModelosMateriais> materiais, List<ModelosPatrimonios> patrimonios)
         {
             InitializeComponent();
             _materiais = materiais;
+            _patrimonios = patrimonios;
+            LstMateriais.ItemsSource = _materiais;
 
-            //LstMateriais.ItemsSource = materiais;
-            //LstMateriais.DisplayMemberPath = "material";
-
-            //AtualizarInformacoesOrigem();
-
+            PreencherOrigem();
             CarregarDepartamentos();
         }
-
-        //private void LstMateriais_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if (LstMateriais.SelectedItem is ModelosMateriais material)
-        //    {
-        //        TxtDepartamentoOrigem.Text = material.departamento_nome;
-        //        TxtSubDepartamentoOrigem.Text = material.subdepartamento_nome;
-        //        TxtResponsavelOrigem.Text = material.responsavel;
-        //    }
-        //}
-
-        private async void CmbDepartamentoDestino_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (CmbDepartamentoDestino.SelectedValue is Guid departamentoId)
-            {
-                var subdeps = await _servicoSub.ListarPorDepartamentoAsync(departamentoId);
-
-                CmbSubDepartamentoDestino.ItemsSource = subdeps;
-            }
-        }
-
-        //private void AtualizarInformacoesOrigem()
-        //{
-        //    var departamentos = _materiais.Select(x => x.departamento_nome).Distinct().ToList();
-        //    var subDepartamentos = _materiais.Select(x => x.subdepartamento_nome).Distinct().ToList();
-        //    var responsaveis = _materiais.Select(x => x.responsavel).Distinct().ToList();
-
-        //    TxtDepartamentoOrigem.Text =
-        //        departamentos.Count == 1 ? departamentos.First() : "Múltiplos departamentos";
-
-        //    TxtSubDepartamentoOrigem.Text =
-        //        subDepartamentos.Count == 1 ? subDepartamentos.First() : "Múltiplos subdepartamentos";
-
-        //    TxtResponsavelOrigem.Text =
-        //        responsaveis.Count == 1 ? responsaveis.First() : "Múltiplos responsáveis";
-        //}
 
         private async void CarregarDepartamentos()
         {
             try
             {
                 var lista = await _servicoDep.ListarAsync();
-
                 CmbDepartamentoDestino.ItemsSource = lista;
             }
             catch (Exception ex)
@@ -92,17 +47,42 @@ namespace ControleMaterialIBAA.View.Janelas
             }
         }
 
-        private async void BtnConfirmar_Click(object sender, RoutedEventArgs e)
+        private async Task PreencherOrigem()
+        {
+            var departamentos = new List<string>();
+            var subdeps = new List<string>();
+            var responsaveis = new List<string>();
+
+            foreach (var mat in _materiais)
+            {
+                var origem = await _servicoMateriais.ObterOrigemMaterial(mat);
+
+                departamentos.Add(origem.departamento);
+                subdeps.Add(origem.subDepartamento);
+                responsaveis.Add(origem.responsavel);
+            }
+
+            TxtDepartamentoOrigem.Text = departamentos.Distinct().Count() == 1 ? departamentos.First() : "Múltiplos";
+
+            TxtSubDepartamentoOrigem.Text = subdeps.Distinct().Count() == 1 ? subdeps.First() : "Múltiplos";
+
+            TxtResponsavelOrigem.Text = responsaveis.Distinct().Count() == 1 ? responsaveis.First() : "Múltiplos";
+        }
+
+        private async void CmbDepartamentoDestino_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CmbDepartamentoDestino.SelectedValue is Guid departamentoId)
+            {
+                var subdeps = await _servicoSub.ListarPorDepartamentoAsync(departamentoId);
+                CmbSubDepartamentoDestino.ItemsSource = subdeps;
+            }
+        }
+        
+        private void BtnConfirmar_Click(object sender, RoutedEventArgs e)
         {
             if (CmbDepartamentoDestino.SelectedValue == null)
             {
                 MessageBox.Show("Selecione o novo departamento.");
-                return;
-            }
-
-            if (CmbSubDepartamentoDestino.SelectedValue == null)
-            {
-                MessageBox.Show("Selecione o novo subdepartamento.");
                 return;
             }
 
@@ -112,42 +92,27 @@ namespace ControleMaterialIBAA.View.Janelas
                 return;
             }
 
-            var novoDepartamento = (Guid)CmbDepartamentoDestino.SelectedValue;
-            var novoSubDepartamento = (Guid)CmbSubDepartamentoDestino.SelectedValue;
-            var novoResponsavel = TxtResponsavelDestino.Text.Trim();
-
-            try
+            if (!int.TryParse(TxtQuantidade.Text, out int quantidade) || quantidade <= 0)
             {
-                foreach (var material in _materiais)
-                {                    
-                    var movimentacao = new ModelosMovimentacoes
-                    {
-                        id = Guid.NewGuid(),
-                        materialId = material.id,
-                        departamentoId = novoDepartamento,
-                        tipo = TipoMovimentacao.Transferencia,
-                        usuario_id = Sessao.UsuarioLogado.Id,
-                        dtmovimentacao = DateTime.Now,
-                        observacao = TxtObservacao.Text
-                    };
-
-                    await _servicoMov.RegistrarMovimentacaoAsync(movimentacao);
-                    
-                    //await _servicoMateriais.AtualizarAsync(
-                    //    material.id,
-                    //    ativo
-                    //);
-                }
-
-                MessageBox.Show("Transferência realizada com sucesso.");
-
-                DialogResult = true;
-                Close();
+                MessageBox.Show("Quantidade inválida.");
+                return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro ao realizar transferência:\n{ex.Message}");
-            }
+
+            departamentoDestinoId = (Guid)CmbDepartamentoDestino.SelectedValue;
+            subDepartamentoDestinoId = CmbSubDepartamentoDestino.SelectedValue as Guid?;
+            responsavelDestino = TxtResponsavelDestino.Text.Trim();
+            observacao = TxtObservacao.Text;
+            quant = quantidade;
+
+            confirmado = true;
+
+            Close();
+        }
+
+        private void BtnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            confirmado = false;
+            Close();
         }
     }
 }
