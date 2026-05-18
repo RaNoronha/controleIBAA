@@ -24,6 +24,8 @@ namespace ControleMaterialIBAA.View.Paginas
     public partial class GerenciarMaterial : UserControl
     {
         private readonly ServicoMateriais _servicoMateriais = new ServicoMateriais();
+        private List<ModelosMateriais> _materiais;
+
         public GerenciarMaterial()
         {
             InitializeComponent();
@@ -160,6 +162,28 @@ namespace ControleMaterialIBAA.View.Paginas
             var popup = new PopupHistoricoMaterial(materialId);
 
             popup.ShowDialog();
+        }
+
+        private async void BtnEstocarMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            var lista = DgMateriais.Items.Cast<ModelosMateriais>().ToList();
+
+            var selecionados = lista.Where(x => x.selecionado).ToList();            
+
+            if (selecionados.Count == 0)
+            {
+                MessageBox.Show("Selecione pelo menos um material para estocar.");
+                return;
+            }
+            
+            var popup = new PopupEstocarMaterial();
+            popup.ShowDialog();
+
+            if (!popup.confirmado) {return;}             
+
+            
+            await _servicoMateriais.EstocarMateriais(selecionados, popup);
+
         }
     }
 }

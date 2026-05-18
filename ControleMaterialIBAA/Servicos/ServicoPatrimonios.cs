@@ -37,5 +37,16 @@ namespace ControleMaterialIBAA.Servicos
             var json = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<List<ModelosPatrimonios>>(json);
         }
+
+        public async Task<bool> AtualizarAsync(ModelosPatrimonios patrimonio)
+        {
+            var json = JsonConvert.SerializeObject(patrimonio);
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _http.PatchAsync($"{Conexao.BaseUrl}/patrimonios?id=eq.{patrimonio.id}",content);
+
+            return response.IsSuccessStatusCode;
+        }
     }
 }

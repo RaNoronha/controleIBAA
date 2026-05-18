@@ -9,6 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="View\Paginas\BaixaMaterial.xaml.cs" />
+    <Compile Remove="View\Paginas\ConsultaSimplificadaMaterial.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="View\Paginas\BaixaMaterial.xaml" />
+    <Page Remove="View\Paginas\ConsultaSimplificadaMaterial.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.2">
       <PrivateAssets>all</PrivateAssets>

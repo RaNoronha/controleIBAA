@@ -55,20 +55,20 @@
 
                 <TextBlock Text="Código:"
                            VerticalAlignment="Center"
-                           FontWeight="Bold" Margin="117,0,134,0" Grid.Column="2" Grid.ColumnSpan="2"/>
+                           FontWeight="Bold" Margin="105,0,146,0" Grid.Column="2" Grid.ColumnSpan="2"/>
 
                 <TextBox x:Name="TxtCod"
-                         Margin="177,5,105,5" Grid.Column="2" Grid.ColumnSpan="2"/>
+                         Margin="155,5,127,5" Grid.Column="2" Grid.ColumnSpan="2"/>
 
                 <!-- Tipo Material -->
                 <TextBlock Text="Tipo Material:"
                            Grid.Column="3"
                            FontWeight="Bold"
-                           Margin="102,8,98,8" Grid.ColumnSpan="2"/>
+                           Margin="90,8,110,8" Grid.ColumnSpan="2"/>
 
                 <ComboBox x:Name="CmbTipoMaterial"
                           Grid.Column="4"
-                          Margin="15,5,125,5"
+                          Margin="0,5,140,5"
                           Grid.ColumnSpan="2"
                           SelectedValuePath="Key"
                           DisplayMemberPath="Value"/>
@@ -89,7 +89,7 @@
             Margin="1" 
             Click="BtnPesquisar_Click"/>
 
-            <Button Content="Excluir"
+                <Button Content="Excluir"
             Width="100"
             Height="30"
             FontWeight="Bold"
@@ -98,6 +98,14 @@
             BorderThickness="0"
             Margin="10"
             Click="BtnExcluir_Click"/>
+                <Button Content="Estocar Material"
+            Width="120"
+            Height="30"
+            FontWeight="Bold"
+            Background="Blue"
+            Foreground="White"
+            BorderThickness="0"
+            Click="BtnEstocarMaterial_Click"/>
 
             </StackPanel>
 
@@ -115,8 +123,8 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding selecionado, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center"/>
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

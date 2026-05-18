@@ -73,7 +73,16 @@ namespace ControleMaterialIBAA.View.Paginas
 
         private async void BtnTranferirMaterial_Click(object sender, RoutedEventArgs e)
         {
-            var selecionados = _materiais.Where(x => x.selecionado).ToList();
+            if (_materiais == null)
+            {
+                MessageBox.Show("Lista de materiais não carregada.");
+                return;
+            }
+
+            DgMateriais.CommitEdit(DataGridEditingUnit.Cell, true);
+            DgMateriais.CommitEdit(DataGridEditingUnit.Row, true);
+
+            var selecionados = _materiais.Where(x => x.selecionado).ToList();                       
 
             if (selecionados.Count == 0)
             {
@@ -81,22 +90,15 @@ namespace ControleMaterialIBAA.View.Paginas
                 return;
             }
 
-            var patrimoniosSelecionados = new List<ModelosPatrimonios>();
-
             if (_patrimonios == null || !_patrimonios.Any())
             {
-                _patrimonios = await _servicoPatrimonios.ListarAsync(); 
-            }
-            foreach (var mat in selecionados)
-            {
-                var patrimonio = _patrimonios.FirstOrDefault(p => p.materialId == mat.id && p.ativo);
-                patrimoniosSelecionados.Add(patrimonio);
+                _patrimonios = await _servicoPatrimonios.ListarAsync();
             }
 
-            var popup = new PopupTransferenciaMaterial(selecionados, patrimoniosSelecionados);
+            var popup = new PopupTransferenciaMaterial(selecionados, _patrimonios);
             popup.ShowDialog();
 
-            if (!popup.confirmado) {return;}
+            if (!popup.confirmado) return;
 
             var departamentoId = popup.departamentoDestinoId;
             Guid? subDepartamentoId = popup.subDepartamentoDestinoId;
@@ -106,34 +108,48 @@ namespace ControleMaterialIBAA.View.Paginas
 
             foreach (var material in selecionados)
             {
-                if (material.tipoMaterial == TipoMaterial.Permanente)
+                bool isPermanente = material.tipoMaterial == TipoMaterial.Permanente;
+                
+                if (isPermanente)
                 {
-                    var listaPatrimonios = new List<ModelosPatrimonios>();
+                    var patrimoniosSelecionados = popup.patrimoniosSelecionados
+                        .Where(p => p.materialId == material.id)
+                        .ToList();
 
-                    for (int i = 0; i < quantidade; i++)
+                    if (!patrimoniosSelecionados.Any())
                     {
-                        listaPatrimonios.Add(new ModelosPatrimonios
-                        {
-                            id = Guid.NewGuid(),
-                            numeroPatrimonial = Convert.ToInt32(GerarCodigos.GerarNumeroPatrimonial()),
-                            materialId = material.id,
-                            departamentoId = departamentoId,
-                            subDepartamentoId = subDepartamentoId,
-                            responsavel = responsavel,
-                            dtTransferencia = DateTime.Now,
-                            ativo = true
-                        });
+                        MessageBox.Show($"Nenhum patrimônio selecionado para {material.nome}");
+                        return;
                     }
 
-                    var sucessoPatrimonio = await _servicoPatrimonios.CriarAsync(listaPatrimonios);
-
-                    if (!sucessoPatrimonio)
+                    foreach (var pat in patrimoniosSelecionados)
                     {
-                        MessageBox.Show($"Erro ao gerar patrimônio para {material.nome}");
+                        pat.departamentoId = departamentoId;
+                        pat.subDepartamentoId = subDepartamentoId;
+                        pat.responsavel = responsavel;
+                        pat.dtTransferencia = DateTime.Now;
+
+                        var sucessoPat = await _servicoPatrimonios.AtualizarAsync(pat);
+
+                        if (!sucessoPat)
+                        {
+                            MessageBox.Show($"Erro ao atualizar patrimônio {pat.numeroPatrimonial}");
+                            return;
+                        }
+                    }
+
+                    quantidade = patrimoniosSelecionados.Count;
+                }
+
+                if (!isPermanente)
+                {
+                    if (quantidade <= 0)
+                    {
+                        MessageBox.Show($"Quantidade inválida para {material.nome}");
                         return;
                     }
                 }
-
+               
                 var movimentacao = new ModelosMovimentacoes
                 {
                     id = Guid.NewGuid(),
@@ -157,11 +173,114 @@ namespace ControleMaterialIBAA.View.Paginas
             }
 
             MessageBox.Show("Transferência realizada com sucesso!");
-            
+
             foreach (var item in _materiais)
             {
                 item.selecionado = false;
-            }               
+            }
+
+            DgMateriais.Items.Refresh();
+
+            
+        }
+        private async void BtnBaixarMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            if (_materiais == null || !_materiais.Any())
+            {
+                MessageBox.Show("Nenhum material carregado.");
+                return;
+            }
+
+            DgMateriais.CommitEdit(DataGridEditingUnit.Cell, true);
+            DgMateriais.CommitEdit(DataGridEditingUnit.Row, true);
+
+            var selecionados = _materiais.Where(x => x.selecionado).ToList();
+
+            if (!selecionados.Any())
+            {
+                MessageBox.Show("Selecione ao menos um material.");
+                return;
+            }
+
+            var consumoInvalido = selecionados.FirstOrDefault(m => m.tipoMaterial == TipoMaterial.Consumo);
+
+            if (consumoInvalido != null)
+            {
+                MessageBox.Show(
+                    $"O material \"{consumoInvalido.nome}\" é do tipo CONSUMO e não permite baixa patrimonial.\n\n" +
+                    "Apenas materiais do tipo PERMANENTE podem ser baixados.",
+                    "Operação não permitida",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+                return;
+            }
+
+            if (_patrimonios == null || !_patrimonios.Any())
+            {
+                _patrimonios = await _servicoPatrimonios.ListarAsync();
+            }
+            
+            var popup = new PopupBaixaMaterial(selecionados, _patrimonios);
+            popup.ShowDialog();
+
+            if (!popup.confirmado)
+            {
+                return;
+            }
+
+            if (popup.patrimoniosSelecionados == null || !popup.patrimoniosSelecionados.Any())
+            {
+                MessageBox.Show("Selecione ao menos um patrimônio.");
+                return;
+            }
+
+            foreach (var pat in popup.patrimoniosSelecionados)
+            {
+                try
+                {
+                    pat.ativo = false;
+                    var sucessoPat = await _servicoPatrimonios.AtualizarAsync(pat);
+
+                    if (!sucessoPat)
+                    {
+                        MessageBox.Show($"Erro ao atualizar patrimônio {pat.numeroPatrimonial}");
+                        continue;
+                    }
+
+                    var movimentacao = new ModelosMovimentacoes
+                    {
+                        id = Guid.NewGuid(),
+                        materialId = pat.materialId,
+                        departamentoId = pat.departamentoId,
+                        subDepartamentoId = pat.subDepartamentoId,
+                        quantidade = 1,
+                        tipo = popup.tipoBaixa,
+                        usuarioId = Sessao.UsuarioLogado.Id,
+                        dtMovimentacao = DateTime.Now,
+                        observacao = popup.observacao
+                    };
+
+                    var sucessoMov = await _servicoMovimentacoes.CriarAsync(movimentacao);
+
+                    if (!sucessoMov)
+                    {
+                        MessageBox.Show($"Erro ao registrar movimentação do patrimônio {pat.numeroPatrimonial}");
+                        continue;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erro ao processar patrimônio {pat.numeroPatrimonial}: {ex.Message}");
+                    continue;
+                }
+            }
+
+            MessageBox.Show("Baixa realizada com sucesso!");
+
+            foreach (var item in _materiais)
+            {
+                item.selecionado = false;
+            }                
 
             DgMateriais.Items.Refresh();
         }

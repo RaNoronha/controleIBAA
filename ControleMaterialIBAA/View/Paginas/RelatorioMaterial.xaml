@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="ControleMaterialIBAA.View.Paginas.RelatorioMaterial"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+
+    <Grid Background="#6F9C9C">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- HEADER -->
+        <Border Grid.Row="0" Background="#4E7C7C">
+            <Grid>
+                <TextBlock Text="RELATÓRIO DE ESTOQUE"
+                           Foreground="Black"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <!-- FILTROS -->
+        <Border Grid.Row="1" Margin="20,15,20,10" CornerRadius="10" Background="White">
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="260"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="220"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="1" Text="Código:" VerticalAlignment="Center" FontWeight="Bold" FontSize="14" Margin="87,0,13,0"/>
+                <TextBox x:Name="TxtCodigo" Grid.Column="1" Height="35" FontSize="14" VerticalContentAlignment="Center" Margin="154,5,216,5" Grid.ColumnSpan="3"/>
+
+                <TextBlock Grid.Column="3" Text="Material:" VerticalAlignment="Center" FontWeight="Bold" FontSize="14" Margin="84,0,96,0"/>
+                <ComboBox x:Name="CmbMaterial" Grid.Column="3" Height="35" FontSize="14" Margin="154,5,176,5" VerticalContentAlignment="Center" DisplayMemberPath="nome" SelectedValuePath="id" Grid.ColumnSpan="3"/>
+
+                <TextBlock Grid.Column="5" Text="Status:" VerticalAlignment="Center" FontWeight="Bold" FontSize="14" Margin="96,0,44,0"/>
+                <ComboBox x:Name="CmbStatus" Grid.Column="5" Height="35" FontSize="14" VerticalContentAlignment="Center" Margin="154,5,-154,5">
+                    <ComboBoxItem Content="TODOS" IsSelected="True"/>
+                    <ComboBoxItem Content="CRITICO"/>
+                    <ComboBoxItem Content="ATENCAO"/>
+                    <ComboBoxItem Content="NORMAL"/>
+                </ComboBox>
+            </Grid>
+        </Border>
+
+        <!-- BOTÕES -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="BtnPesquisar" Content="🔍 Pesquisar" Width="170" Height="40" Margin="10,0" Background="#3E6F6F" Foreground="White" FontWeight="Bold" BorderThickness="0" Cursor="Hand" Click="BtnPesquisar_Click"/>
+            <Button x:Name="BtnAtualizar" Content="🔄 Atualizar" Width="170" Height="40" Margin="10,0" Background="#2E75B6" Foreground="White" FontWeight="Bold" BorderThickness="0" Cursor="Hand" Click="BtnAtualizar_Click"/>
+            <Button x:Name="BtnExportar" Content=" Exportar Excel" Width="190" Height="40" Margin="10,0" Background="#217346" Foreground="White" FontWeight="Bold" BorderThickness="0" Cursor="Hand" Click="BtnExportar_Click"/>
+        </StackPanel>
+
+        <!-- GRID -->
+        <Border Grid.Row="3" Margin="20,0,20,20" Background="White" CornerRadius="10" Padding="10">
+            <DataGrid x:Name="DgRelatorioEstoque"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      RowHeight="38"
+                      FontSize="14"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="Horizontal"
+                      AlternatingRowBackground="#F3F3F3"
+                      AlternationCount="2"
+                      SelectionMode="Single"
+                      SelectionUnit="FullRow">
+
+                <!-- ESTILO DAS LINHAS -->
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="#B4FFB4"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Style.Triggers>
+                            <!-- < 10% -->
+                            <DataTrigger Binding="{Binding status_estoque}" Value="CRITICO">
+                                <Setter Property="Background" Value="#FFB4B4"/>
+                            </DataTrigger>
+                            <!-- 10% a 15% -->
+                            <DataTrigger Binding="{Binding status_estoque}" Value="ATENCAO">
+                                <Setter Property="Background" Value="#FFE696"/>
+                            </DataTrigger>
+                            <!-- > 15% -->
+                            <DataTrigger Binding="{Binding status_estoque}" Value="NORMAL">
+                                <Setter Property="Background" Value="#B4FFB4"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+
+                <!-- COLUNAS -->
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Código" Binding="{Binding cod}" Width="120"/>
+                    <DataGridTextColumn Header="Material" Binding="{Binding nome}" Width="250"/>
+                    <DataGridTextColumn Header="Entrada" Binding="{Binding total_entrada}" Width="120"/>
+                    <DataGridTextColumn Header="Saída" Binding="{Binding total_saida}" Width="120"/>
+                    <DataGridTextColumn Header="Atual" Binding="{Binding estoque_atual}" Width="120"/>
+                    <DataGridTextColumn Header="% Restante" Binding="{Binding percentual_restante, StringFormat={}{0:N2}%}" Width="140"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding status_estoque}" Width="140"/>
+
+                    <!-- BARRA -->
+                    <DataGridTemplateColumn Header="Nível" Width="250">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Margin="5">
+                                    <ProgressBar Value="{Binding percentual_restante}" Maximum="100" Height="22"/>
+                                    <TextBlock Text="{Binding percentual_restante, StringFormat={}{0:N2}%}"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Bold"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</UserControl>

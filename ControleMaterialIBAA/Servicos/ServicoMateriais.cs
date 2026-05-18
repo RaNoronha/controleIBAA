@@ -1,7 +1,10 @@
 ﻿using ControleMaterialIBAA.Config;
 using ControleMaterialIBAA.DTO;
 using ControleMaterialIBAA.Enums;
+using ControleMaterialIBAA.Helper;
+using ControleMaterialIBAA.Infra;
 using ControleMaterialIBAA.Modelos;
+using ControleMaterialIBAA.View.Janelas;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,6 +22,7 @@ namespace ControleMaterialIBAA.Servicos
         ServicoDepartamentos _servicoDep = new ServicoDepartamentos();
         ServicoSubDepartamentos _servicoSub = new ServicoSubDepartamentos();
         ServicoMovimentacoes _servicoMovimentacoes = new ServicoMovimentacoes();
+        ServicoPatrimonios _servicoPatrimonios = new ServicoPatrimonios();
         public async Task<List<ModelosMateriais>> ListarAsync(bool ativos = true,string? cod = null ,TipoMaterial? tipo = null)
         {
             var parametros = new List<string>();
@@ -141,6 +145,59 @@ namespace ControleMaterialIBAA.Servicos
         {
             var response = await _http.DeleteAsync($"{Conexao.BaseUrl}/materiais?id=eq.{id}");
             response.EnsureSuccessStatusCode();
+        }
+
+        public async Task EstocarMateriais(List<ModelosMateriais> materiais, PopupEstocarMaterial popup)
+        {
+            var quantidade = popup.quantidade;
+            var responsavel = popup.responsavel;
+            var observacao = popup.observacao;
+
+            var departamentoEstoque = await _servicoDep.ObterOuCriarEstoque();
+
+            var departamentoEstoqueId = departamentoEstoque.id;
+
+            foreach (var material in materiais)
+            {                
+                if (material.tipoMaterial == TipoMaterial.Permanente)
+                {
+                    var listaPatrimonios = new List<ModelosPatrimonios>();
+
+                    for (int i = 0; i < quantidade; i++)
+                    {
+                        listaPatrimonios.Add(new ModelosPatrimonios
+                        {
+                            id = Guid.NewGuid(),
+                            numeroPatrimonial = Convert.ToInt32(GerarCodigos.GerarNumeroPatrimonial()),
+                            materialId = material.id,
+                            departamentoId = departamentoEstoqueId,
+                            subDepartamentoId = null,
+                            responsavel = responsavel,
+                            dtTransferencia = DateTime.Now,
+                            ativo = true
+                        });
+                    }
+
+                    await _servicoPatrimonios.CriarAsync(listaPatrimonios);
+                }
+                
+                var movimentacao = new ModelosMovimentacoes
+                {
+                    id = Guid.NewGuid(),
+                    materialId = material.id,
+                    departamentoId = departamentoEstoqueId,
+                    subDepartamentoId = null,
+                    quantidade = quantidade,
+                    tipo = TipoMovimentacao.Entrada,
+                    usuarioId = Sessao.UsuarioLogado.Id,
+                    dtMovimentacao = DateTime.Now,
+                    observacao = observacao
+                };
+
+                await _servicoMovimentacoes.CriarAsync(movimentacao);
+            }
+
+            MessageBox.Show("Material estocado com sucesso!");
         }
         public async Task<OrigemMaterialDto> ObterOrigemMaterial(ModelosMateriais mat)
         {

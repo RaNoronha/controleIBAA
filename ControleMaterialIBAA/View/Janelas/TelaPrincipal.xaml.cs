@@ -33,11 +33,7 @@ namespace ControleMaterialIBAA.View.Janelas
         {
             MainContent.Content = new GerenciarMaterial();
         }
-
-        private void ConsultaResumida(object sender, RoutedEventArgs e)
-        {
-            MainContent.Content = new ConsultaSimplificadaMaterial();
-        }
+    
 
         private void TransferirMaterial(object sender, RoutedEventArgs e)
         {
@@ -54,10 +50,10 @@ namespace ControleMaterialIBAA.View.Janelas
             MainContent.Content = new CadastrarSubDepartamento();
         }
 
-        //private void ConsultaDepartamento(object sender, RoutedEventArgs e)
-        //{
-        //    MainContent.Content = new ConsultaDepartamento();
-        //}
+        private void RelatorioMaterial(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new RelatorioMaterial();
+        }
 
         //private void ExcluirDepartamento(object sender, RoutedEventArgs e)
         //{

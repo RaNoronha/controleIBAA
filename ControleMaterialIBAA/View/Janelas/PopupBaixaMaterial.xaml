@@ -1,0 +1,141 @@
+﻿<Window x:Class="ControleMaterialIBAA.View.Janelas.PopupBaixaMaterial"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Baixa de Patrimônio"
+        Height="700"
+        Width="520"
+        Background="#E8F0F0"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,-16">
+
+        <Grid Margin="20" Height="652">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- materiais -->
+                <RowDefinition Height="Auto"/>
+                <!-- tipo baixa -->
+                <RowDefinition Height="Auto"/>
+                <!-- grid patrimonios -->
+                <RowDefinition Height="Auto"/>
+                <!-- observação -->
+                <RowDefinition Height="Auto"/>
+                <!-- botões -->
+            </Grid.RowDefinitions>
+
+            <!-- 🔥 MATERIAIS SELECIONADOS (AGORA NO TOPO) -->
+            <TextBlock Text="Materiais Selecionados"
+                       FontWeight="Bold"
+                       FontSize="14"
+                       Foreground="#2F4F4F"/>
+
+            <ListBox x:Name="LstMateriais"
+                     Grid.Row="1"
+                     Margin="0,5,0,10"
+                     Height="120"
+                     DisplayMemberPath="nome"/>
+
+            <!-- 🔥 TIPO DE BAIXA -->
+            <StackPanel Grid.Row="2" Margin="0,5">
+
+                <TextBlock Text="Tipo de Baixa"
+                           FontWeight="Bold"/>
+
+                <ComboBox x:Name="CmbTipoBaixa"
+                          Margin="0,5,0,0">
+
+                    <ComboBoxItem Content="Baixa" Tag="3"/>
+                    <ComboBoxItem Content="Descarte" Tag="4"/>
+                    <ComboBoxItem Content="Dano" Tag="5"/>
+
+                </ComboBox>
+
+            </StackPanel>
+
+            <!-- 🟢 PATRIMÔNIOS (APENAS PERMANENTE) -->
+            <StackPanel x:Name="PanelPatrimonios"
+                        Grid.Row="3"
+                        Margin="0,10,0,10">
+
+                <TextBlock Text="Selecione os Patrimônios"
+                           FontWeight="Bold"
+                           Margin="0,0,0,5"/>
+
+                <DataGrid x:Name="DgPatrimonios"
+                          AutoGenerateColumns="False"
+                          Height="200"
+                          CanUserAddRows="False">
+
+                    <DataGrid.Columns>
+
+                        <DataGridTemplateColumn Header="Sel" Width="50">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding selecionado, Mode=TwoWay}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="Nº Patrimonial"
+                                            Binding="{Binding numeroPatrimonial}"
+                                            Width="120"/>
+                        <DataGridTextColumn Header="Departamento"
+                                            Binding="{Binding departamentoNome}"
+                                            Width="120"/>
+                        <DataGridTextColumn Header="Sub Departamento"
+                                            Binding="{Binding subDepartamentoNome}"
+                                            Width="120"/>
+                        <DataGridTextColumn Header="Responsável"
+                                            Binding="{Binding responsavel}"
+                                            Width="150"/>
+
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </StackPanel>
+
+            <!-- 🔥 OBSERVAÇÃO -->
+            <StackPanel Grid.Row="4" Margin="0,10,0,0">
+
+                <TextBlock Text="Observação"
+                           FontWeight="Bold"/>
+
+                <TextBox x:Name="TxtObservacao"
+                         Height="80"
+                         TextWrapping="Wrap"
+                         Margin="0,5,0,10"/>
+
+            </StackPanel>
+
+            <!-- 🔥 BOTÕES -->
+            <StackPanel Grid.Row="4"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center" Margin="0,90,0,-120">
+
+                <Button Content="Confirmar"
+                        Width="120"
+                        Height="35"
+                        Background="#3E6F6F"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        Click="BtnConfirmar_Click"/>
+
+                <Button Content="Cancelar"
+                        Width="120"
+                        Height="35"
+                        Margin="5"
+                        Background="#A94442"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        Click="BtnCancelar_Click"/>
+
+            </StackPanel>
+
+        </Grid>
+
+    </ScrollViewer>
+
+</Window>

@@ -5,7 +5,13 @@
     <Compile Update="View\Janelas\CadastroUsuario.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Janelas\PopupBaixaMaterial.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Janelas\PopupConfirmacaoExclusao.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Janelas\PopupEstocarmaterial.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Janelas\PopupHistoricoMaterial.xaml.cs">
@@ -23,9 +29,6 @@
     <Compile Update="View\Paginas\CadastrarSubDepartamento.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Paginas\ConsultaSimplificadaMaterial.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\Paginas\GerenciarMaterial.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -33,6 +36,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Paginas\GerenciarPatrimonio.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Paginas\RelatorioMaterial.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

@@ -1,0 +1,57 @@
+﻿<Window x:Class="ControleMaterialIBAA.View.Paginas.BaixaMaterial"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Baixa de Material" Height="600" Width="900">
+
+    <Grid Margin="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- FILTROS -->
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBox Width="120" PlaceholderText="Código" x:Name="TxtCodigo"/>
+            <TextBox Width="250" Margin="10,0,0,0" PlaceholderText="Descrição" x:Name="TxtDescricao"/>
+            <Button Content="Pesquisar" Margin="10,0,0,0" Width="100"
+                    Click="Pesquisar_Click"/>
+        </StackPanel>
+
+        <!-- RESULTADO -->
+        <DataGrid x:Name="DgMateriais"
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  Height="300"
+                  SelectionMode="Extended">
+
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Header="Selecionar" Binding="{Binding Selecionado}" Width="80"/>
+                <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" Width="100"/>
+                <DataGridTextColumn Header="Descrição" Binding="{Binding Descricao}" Width="*"/>
+                <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" Width="120"/>
+                <DataGridTextColumn Header="Saldo" Binding="{Binding Saldo}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- MOTIVO -->
+        <StackPanel Grid.Row="2" Margin="0,10,0,0">
+            <TextBlock Text="Motivo da baixa:"/>
+            <TextBox x:Name="TxtMotivo" Height="60" TextWrapping="Wrap"/>
+
+            <TextBlock Text="Observação:" Margin="0,10,0,0"/>
+            <TextBox x:Name="TxtObservacao" Height="60" TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <!-- AÇÕES -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Confirmar Baixa"
+                    Width="150"
+                    Margin="0,10,0,0"
+                    Click="ConfirmarBaixa_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

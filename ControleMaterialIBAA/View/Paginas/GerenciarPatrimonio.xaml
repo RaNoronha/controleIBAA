@@ -16,11 +16,11 @@
                     Margin="0,30,0,20"
                     HorizontalAlignment="Center">
 
-            <TextBlock Text="TRANSFERÊNCIA DE MATERIAL"
+            <TextBlock
                        FontSize="28"
                        FontWeight="Bold"
                        Foreground="Black"
-                       HorizontalAlignment="Center"/>
+                       HorizontalAlignment="Center"><Run Language="pt-br" Text="GERÊNCIA DE PATRIMÔNIO"/></TextBlock>
 
             <TextBlock Text="Igreja Batista Altitude de Anchieta"
                        FontSize="14"
@@ -86,6 +86,14 @@
             FontWeight="Bold"
             Margin="5"
             Click="BtnTranferirMaterial_Click"/>
+                <Button Content="Baixar Material"
+                        Width="160"
+                        Height="35"
+                        Background="#B22222"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        Margin="5"
+                        Click="BtnBaixarMaterial_Click"/>
             </StackPanel>
 
             <!-- GRID -->
