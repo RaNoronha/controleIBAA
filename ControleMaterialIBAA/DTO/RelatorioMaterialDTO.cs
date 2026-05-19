@@ -1,4 +1,4 @@
-﻿public class RelatorioPermanenteDTO
+﻿public class RelatorioMaterialDTO
 {
     public Guid id { get; set; }
     public string cod { get; set; }

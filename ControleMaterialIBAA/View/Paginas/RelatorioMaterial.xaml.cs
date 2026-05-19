@@ -12,7 +12,7 @@ namespace ControleMaterialIBAA.View.Paginas
         private readonly ServicoRelatorioEstoque _servicoRelatorio = new();
         private readonly ServicoMateriais _servicoMaterial = new();
 
-        private List<RelatorioPermanenteDTO> _listaCompleta;
+        private List<RelatorioMaterialDTO> _listaCompleta;
 
         public RelatorioMaterial()
         {

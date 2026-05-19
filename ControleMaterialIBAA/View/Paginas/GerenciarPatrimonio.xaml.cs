@@ -195,7 +195,6 @@ namespace ControleMaterialIBAA.View.Paginas
             DgMateriais.CommitEdit(DataGridEditingUnit.Row, true);
 
             var selecionados = _materiais.Where(x => x.selecionado).ToList();
-
             if (!selecionados.Any())
             {
                 MessageBox.Show("Selecione ao menos um material.");
@@ -203,36 +202,29 @@ namespace ControleMaterialIBAA.View.Paginas
             }
 
             var consumoInvalido = selecionados.FirstOrDefault(m => m.tipoMaterial == TipoMaterial.Consumo);
-
             if (consumoInvalido != null)
             {
-                MessageBox.Show(
-                    $"O material \"{consumoInvalido.nome}\" é do tipo CONSUMO e não permite baixa patrimonial.\n\n" +
-                    "Apenas materiais do tipo PERMANENTE podem ser baixados.",
-                    "Operação não permitida",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
+                MessageBox.Show($"O material \"{consumoInvalido.nome}\" é do tipo CONSUMO e não permite baixa patrimonial.\n\nApenas materiais PERMANENTES podem ser baixados.",
+                                "Operação não permitida", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             if (_patrimonios == null || !_patrimonios.Any())
-            {
                 _patrimonios = await _servicoPatrimonios.ListarAsync();
-            }
-            
+
             var popup = new PopupBaixaMaterial(selecionados, _patrimonios);
             popup.ShowDialog();
 
-            if (!popup.confirmado)
+            if (!popup.confirmado || popup.patrimoniosSelecionados == null || !popup.patrimoniosSelecionados.Any())
             {
+                if (popup.confirmado) MessageBox.Show("Selecione ao menos um patrimônio.");
                 return;
             }
 
-            if (popup.patrimoniosSelecionados == null || !popup.patrimoniosSelecionados.Any())
-            {
-                MessageBox.Show("Selecione ao menos um patrimônio.");
-                return;
-            }
+            // 🔹 CONTADORES PARA FEEDBACK CLARO
+            int sucessos = 0;
+            int falhas = 0;
+            var erros = new List<string>();
 
             foreach (var pat in popup.patrimoniosSelecionados)
             {
@@ -240,10 +232,10 @@ namespace ControleMaterialIBAA.View.Paginas
                 {
                     pat.ativo = false;
                     var sucessoPat = await _servicoPatrimonios.AtualizarAsync(pat);
-
                     if (!sucessoPat)
                     {
-                        MessageBox.Show($"Erro ao atualizar patrimônio {pat.numeroPatrimonial}");
+                        falhas++;
+                        erros.Add($"❌ Falha ao atualizar {pat.numeroPatrimonial}");
                         continue;
                     }
 
@@ -261,28 +253,41 @@ namespace ControleMaterialIBAA.View.Paginas
                     };
 
                     var sucessoMov = await _servicoMovimentacoes.CriarAsync(movimentacao);
-
                     if (!sucessoMov)
                     {
-                        MessageBox.Show($"Erro ao registrar movimentação do patrimônio {pat.numeroPatrimonial}");
+                        falhas++;
+                        erros.Add($"❌ Falha ao registrar movimentação de {pat.numeroPatrimonial}");
                         continue;
                     }
+
+                    sucessos++;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Erro ao processar patrimônio {pat.numeroPatrimonial}: {ex.Message}");
-                    continue;
+                    falhas++;
+                    erros.Add($"💥 Erro inesperado em {pat.numeroPatrimonial}: {ex.Message}");
                 }
             }
 
-            MessageBox.Show("Baixa realizada com sucesso!");
-
-            foreach (var item in _materiais)
+            // 🔹 FEEDBACK ÚNICO E LIMPO
+            if (falhas > 0)
             {
-                item.selecionado = false;
-            }                
+                MessageBox.Show(
+                    $"️ Baixa parcial!\n✅ Sucessos: {sucessos}\n Falhas: {falhas}\n\n{string.Join("\n", erros)}",
+                    "Atenção", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                MessageBox.Show($"✅ Baixa realizada com sucesso!\n{sucessos} patrimônio(s) processado(s).",
+                                "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
 
+            //  LIMPA SELEÇÃO E ATUALIZA
+            foreach (var item in _materiais) item.selecionado = false;
             DgMateriais.Items.Refresh();
+
+            // Opcional: Recarregar patrimônios para refletir a nova situação
+            _patrimonios = await _servicoPatrimonios.ListarAsync();
         }
     }
 }

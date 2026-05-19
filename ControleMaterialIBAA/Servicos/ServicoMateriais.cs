@@ -52,41 +52,7 @@ namespace ControleMaterialIBAA.Servicos
             var json = await response.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<List<ModelosMateriais>>(json);
-        }
-
-        public async Task<List<ConsultaResumidaDTO>> ConsultaResumidaAsync(string? material = null, Guid? departamentoId = null,TipoMaterial? tipo = null)
-        {
-            var parametros = new List<string>();
-
-            parametros.Add("select=*");
-
-            if (!string.IsNullOrWhiteSpace(material))
-                parametros.Add($"material=ilike.*{material}*");
-
-            if (departamentoId.HasValue && departamentoId != Guid.Empty)
-                parametros.Add($"departamentoId=eq.{departamentoId}");
-
-            if (tipo.HasValue)
-                parametros.Add($"tipoMaterial=eq.{(int)tipo.Value}");
-
-            parametros.Add("order=departamento.asc,material.asc");
-
-            var queryString = "?" + string.Join("&", parametros);
-
-            var url = $"{Conexao.BaseUrl}/vw_materiais_resumo{queryString}";
-
-            var response = await _http.GetAsync(url);
-
-            var content = await response.Content.ReadAsStringAsync();
-
-            if (!response.IsSuccessStatusCode)
-            {
-                MessageBox.Show($"Erro: {response.StatusCode}\n\n{content}");
-                throw new Exception(content);
-            }
-
-            return JsonConvert.DeserializeObject<List<ConsultaResumidaDTO>>(content);
-        }
+        }        
 
         public async Task<ModelosMateriais?> ObterAsync(int id)
         {

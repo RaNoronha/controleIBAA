@@ -11,41 +11,59 @@ namespace ControleMaterialIBAA.Servicos
 {
     public class ServicoRelatorioEstoque : ServicoBase
     {
-        public async Task<List<RelatorioPermanenteDTO>> ListarAsync(string codigo = null, Guid? materialId = null, string status = null)
+        public async Task<List<RelatorioMaterialDTO>> ListarAsync(
+    string codigo = null,
+    Guid? materialId = null,
+    string status = null)
         {
-            var filtros = new List<string>();
+            var listaCompleta = new List<RelatorioMaterialDTO>();
 
-            if (!string.IsNullOrWhiteSpace(codigo))
+            try
             {
-                filtros.Add($"cod=ilike.*{codigo}*");
+                // 1. Busca Consumo
+                var listaConsumo = await BuscarDadosView("vw_relatorio_consumo");
+                listaCompleta.AddRange(listaConsumo);
+
+                // 2. Busca Permanente
+                var listaPermanente = await BuscarDadosView("vw_relatorio_permanente");
+                listaCompleta.AddRange(listaPermanente);
+
+                // 3. Aplica Filtros na lista unificada
+                if (!string.IsNullOrWhiteSpace(codigo))
+                {
+                    listaCompleta = listaCompleta.Where(x => x.cod.Contains(codigo, StringComparison.OrdinalIgnoreCase)).ToList();
+                }
+
+                if (materialId.HasValue)
+                {
+                    listaCompleta = listaCompleta.Where(x => x.id == materialId.Value).ToList();
+                }
+
+                if (!string.IsNullOrWhiteSpace(status) && status != "TODOS")
+                {
+                    listaCompleta = listaCompleta.Where(x => x.status_estoque == status).ToList();
+                }
+
+                // 4. Ordena por nome
+                return listaCompleta.OrderBy(x => x.nome).ToList();
             }
-
-            if (materialId.HasValue)
+            catch (Exception ex)
             {
-                filtros.Add($"id=eq.{materialId.Value}");
-            }                
-
-            var url = $"{Conexao.BaseUrl}/vw_relatorio_permanente";
-            if (filtros.Count > 0)
-            {
-                url += "?" + string.Join("&", filtros);
+                throw new Exception($"Erro ao unificar relatórios: {ex.Message}");
             }
+        }
 
+        // 🔹 Método auxiliar para evitar repetição
+        private async Task<List<RelatorioMaterialDTO>> BuscarDadosView(string nomeView)
+        {
+            var url = $"{Conexao.BaseUrl}/{nomeView}";
             var response = await _http.GetAsync(url);
             var json = await response.Content.ReadAsStringAsync();
 
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception(json);
-            }
-            var lista = JsonConvert.DeserializeObject<List<RelatorioPermanenteDTO>>(json) ?? new List<RelatorioPermanenteDTO>();
+            if (!response.IsSuccessStatusCode) return new List<RelatorioMaterialDTO>();
 
-            if (!string.IsNullOrWhiteSpace(status) && status != "TODOS")
-            {
-                lista = lista.Where(x => x.status_estoque == status).ToList();
-            }
-
-            return lista;
+            return JsonConvert.DeserializeObject<List<RelatorioMaterialDTO>>(json)
+                   ?? new List<RelatorioMaterialDTO>();
         }
     }
 }

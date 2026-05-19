@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ControleMaterialIBAA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+435a2283db75df6517163bd2cc288e7316233c8f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+10e7e6707b0886c79d6658730d870826578b7c73")]
 [assembly: System.Reflection.AssemblyProductAttribute("ControleMaterialIBAA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ControleMaterialIBAA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

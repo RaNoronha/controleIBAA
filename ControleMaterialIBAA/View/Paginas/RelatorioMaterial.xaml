@@ -17,6 +17,7 @@
         <!-- HEADER -->
         <Border Grid.Row="0" Background="#4E7C7C">
             <Grid>
+                <!-- ✅ Cor revertida para White (contraste com fundo escuro) -->
                 <TextBlock Text="RELATÓRIO DE ESTOQUE"
                            Foreground="Black"
                            FontSize="28"
@@ -58,11 +59,13 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="BtnPesquisar" Content="🔍 Pesquisar" Width="170" Height="40" Margin="10,0" Background="#3E6F6F" Foreground="White" FontWeight="Bold" BorderThickness="0" Cursor="Hand" Click="BtnPesquisar_Click"/>
             <Button x:Name="BtnAtualizar" Content="🔄 Atualizar" Width="170" Height="40" Margin="10,0" Background="#2E75B6" Foreground="White" FontWeight="Bold" BorderThickness="0" Cursor="Hand" Click="BtnAtualizar_Click"/>
-            <Button x:Name="BtnExportar" Content=" Exportar Excel" Width="190" Height="40" Margin="10,0" Background="#217346" Foreground="White" FontWeight="Bold" BorderThickness="0" Cursor="Hand" Click="BtnExportar_Click"/>
+            <Button x:Name="BtnExportar" Content="📊 Exportar Excel" Width="190" Height="40" Margin="10,0" Background="#217346" Foreground="White" FontWeight="Bold" BorderThickness="0" Cursor="Hand" Click="BtnExportar_Click"/>
         </StackPanel>
 
         <!-- GRID -->
         <Border Grid.Row="3" Margin="20,0,20,20" Background="White" CornerRadius="10" Padding="10">
+
+            <!-- ✅ REMOVIDO: AlternatingRowBackground e AlternationCount -->
             <DataGrid x:Name="DgRelatorioEstoque"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
@@ -71,27 +74,25 @@
                       FontSize="14"
                       HeadersVisibility="Column"
                       GridLinesVisibility="Horizontal"
-                      AlternatingRowBackground="#F3F3F3"
-                      AlternationCount="2"
                       SelectionMode="Single"
                       SelectionUnit="FullRow">
 
-                <!-- ESTILO DAS LINHAS -->
+                <!-- ESTILO DAS LINHAS COM CORES DINÂMICAS -->
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
                         <Setter Property="Background" Value="#B4FFB4"/>
                         <Setter Property="Foreground" Value="Black"/>
                         <Setter Property="FontWeight" Value="SemiBold"/>
                         <Style.Triggers>
-                            <!-- < 10% -->
+                            <!-- < 10% → Vermelho -->
                             <DataTrigger Binding="{Binding status_estoque}" Value="CRITICO">
                                 <Setter Property="Background" Value="#FFB4B4"/>
                             </DataTrigger>
-                            <!-- 10% a 15% -->
+                            <!-- 10% a 15% → Amarelo -->
                             <DataTrigger Binding="{Binding status_estoque}" Value="ATENCAO">
                                 <Setter Property="Background" Value="#FFE696"/>
                             </DataTrigger>
-                            <!-- > 15% -->
+                            <!-- > 15% → Verde -->
                             <DataTrigger Binding="{Binding status_estoque}" Value="NORMAL">
                                 <Setter Property="Background" Value="#B4FFB4"/>
                             </DataTrigger>

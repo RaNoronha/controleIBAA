@@ -70,7 +70,7 @@ namespace ControleMaterialIBAA.View.Janelas
                 MessageBox.Show("Selecione o tipo de baixa.");
                 return;
             }
-
+            DgPatrimonios.CommitEdit(DataGridEditingUnit.Row, true);
             tipoBaixa = (TipoMovimentacao)int.Parse(comboItem.Tag.ToString());
 
             observacao = TxtObservacao.Text?.Trim();
